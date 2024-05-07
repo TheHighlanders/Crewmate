@@ -35,6 +35,9 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-core:2.12.4"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.12.4"
     implementation 'edu.wpi.first.thirdparty.frc2024.opencv:opencv-java:4.8.0-2'
+
+    testImplementation libs.junit.jupiter
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 // Set up exports properly
@@ -128,3 +131,9 @@ apply from: 'publish.gradle'
 wrapper {
   gradleVersion '8.4'
 }
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
