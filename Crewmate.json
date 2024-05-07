@@ -1,5 +1,5 @@
 {
-    "fileName": "CrewmateJSON.json",
+    "fileName": "Crewmate.json",
     "name": "Crewmate",
     "version": "0.0.1",
     "frcYear": "2024",
@@ -7,7 +7,7 @@
     "mavenUrls": [
         "https://TheHighlanders.github.io/Crewmate"
     ],
-    "jsonUrl": "https://TheHighlanders.github.io/Crewmate/CrewmateJSON.json",
+    "jsonUrl": "https://TheHighlanders.github.io/Crewmate/Crewmate.json",
     "javaDependencies": [
         {
             "groupId": "crewmate.lib",
