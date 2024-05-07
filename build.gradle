@@ -1,6 +1,6 @@
 plugins {
   id 'cpp'
-  id 'java'
+  id 'java-library'
   id 'google-test'
   id 'edu.wpi.first.wpilib.repositories.WPILibRepositoriesPlugin' version '2020.2'
   id 'edu.wpi.first.NativeUtils' version '2024.6.1'
@@ -36,95 +36,10 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-databind:2.12.4"
     implementation 'edu.wpi.first.thirdparty.frc2024.opencv:opencv-java:4.8.0-2'
 
-    testImplementation libs.junit.jupiter
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.0.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.3'
 }
 
-// Set up exports properly
-nativeUtils {
-  exportsConfigs {
-    // Main library is just default empty. This will export everything
-    Vendor {
-    }
-  }
-  privateExportsConfigs {
-    // Only export explicit symbols from driver library
-    VendorDriver {
-      exportsFile = project.file("src/main/driver/symbols.txt")
-    }
-  }
-}
-
-model {
-  components {
-    Vendor(NativeLibrarySpec) {
-      sources {
-        cpp {
-          source {
-            srcDirs 'src/main/native/cpp'
-            include '**/*.cpp'
-          }
-          exportedHeaders {
-            srcDirs 'src/main/native/include'
-          }
-        }
-      }
-      binaries.all {
-        lib library: 'VendorDriver', linkage: 'shared'
-      }
-      nativeUtils.useRequiredLibrary(it, 'wpilib_shared')
-    }
-
-    VendorDriver(JniNativeLibrarySpec) {
-      enableCheckTask true
-      javaCompileTasks << compileJava
-      jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.roborio)
-      // Leave these for future proofing
-      jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.linuxarm32)
-      jniCrossCompileOptions << JniCrossCompileOptions(nativeUtils.wpi.platforms.linuxarm64)
-      sources {
-        cpp {
-          source {
-            srcDirs 'src/main/driver/cpp'
-            include '**/*.cpp'
-          }
-          exportedHeaders {
-            srcDirs 'src/main/driver/include'
-          }
-        }
-      }
-
-      nativeUtils.useRequiredLibrary(it, "driver_shared")
-    }
-  }
-  testSuites {
-    VendorTest {
-        sources.cpp {
-            source {
-                srcDir 'src/test/native/cpp'
-                include '**/*.cpp'
-            }
-        }
-
-        binaries.all {
-          lib library: 'VendorDriver', linkage: 'shared'
-        }
-
-        nativeUtils.useRequiredLibrary(it, "wpilib_executable_shared", "googletest_static")
-    }
-
-    VendorDriverTest {
-        sources.cpp {
-            source {
-                srcDir 'src/test/driver/cpp'
-                include '**/*.cpp'
-            }
-        }
-
-        nativeUtils.useRequiredLibrary(it, "wpilib_executable_shared", "googletest_static")
-    }
-  }
-}
 
 apply from: 'publish.gradle'
 
