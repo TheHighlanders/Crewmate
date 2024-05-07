@@ -10,18 +10,18 @@
     "jsonUrl": "https://TheHighlanders.github.io/Crewmate/CrewmateJSON.json",
     "javaDependencies": [
         {
-            "groupId": "com.vendor.frc",
-            "artifactId": "Vendor-java",
+            "groupId": "crewmate.lib",
+            "artifactId": "Crewmate-java",
             "version": "0.0.1"
         }
     ],
     "jniDependencies": [],
     "cppDependencies": [
         {
-            "groupId": "com.vendor.frc",
-            "artifactId": "Vendor-cpp",
+            "groupId": "crewmate.lib",
+            "artifactId": "crewmate-cpp",
             "version": "0.0.1",
-            "libName": "Vendor",
+            "libName": "Crewmate",
             "headerClassifier": "headers",
             "sharedLibrary": false,
             "skipInvalidPlatforms": true,
