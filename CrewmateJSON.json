@@ -7,7 +7,7 @@
     "mavenUrls": [
         "https://TheHighlanders.github.io/Crewmate"
     ],
-    "jsonUrl": "InsertSomeUrlHere",
+    "jsonUrl": "https://TheHighlanders.github.io/Crewmate/CrewmateJSON.json",
     "javaDependencies": [
         {
             "groupId": "com.vendor.frc",
