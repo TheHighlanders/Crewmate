@@ -1,0 +1,1424 @@
+[
+  {
+    "name": "linuxathena",
+    "architecture": "arm-v7",
+    "operatingSystem": "linux",
+    "flavor": "default",
+    "buildType": "debug",
+    "cppPath": "C:\\Users\\Public\\wpilib\\2024\\roborio\\bin\\arm-frc2024-linux-gnueabi-g++.exe",
+    "cPath": "C:\\Users\\Public\\wpilib\\2024\\roborio\\bin\\arm-frc2024-linux-gnueabi-gcc.exe",
+    "msvc": false,
+    "gcc": true,
+    "systemCppMacros": [],
+    "systemCppArgs": [],
+    "systemCMacros": [],
+    "systemCArgs": [],
+    "allLibFiles": [
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\c5f7ccae60e03d635052fb75f9d8d250\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\36eddd9da63594003f8cc0946b4ff32e\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b4d229156fa4d27a6941091f4e528b17\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\13c327f81ff44b83ebbd4a07515bb470\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\78dce87e75fb143a7e1dad8b1f962c03\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43b4a27927f6a5a005f4cd18017ba286\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\60b75a807ef62e0671e725a652cc383a\\transformed\\googletest-1.14.0-1-sources\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+    ],
+    "allLibSources": [
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\c5f7ccae60e03d635052fb75f9d8d250\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\36eddd9da63594003f8cc0946b4ff32e\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b4d229156fa4d27a6941091f4e528b17\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\13c327f81ff44b83ebbd4a07515bb470\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\78dce87e75fb143a7e1dad8b1f962c03\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43b4a27927f6a5a005f4cd18017ba286\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\60b75a807ef62e0671e725a652cc383a\\transformed\\googletest-1.14.0-1-sources\\"
+    ],
+    "allLibHeaders": [
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+    ],
+    "binaries": [
+      {
+        "componentName": "VendorDriver",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+        ],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "componentName": "VendorDriver",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "componentName": "VendorDriverTest",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorDriverTest\\headers\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          },
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "componentName": "Vendor",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+        ],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "componentName": "Vendor",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "componentName": "VendorTest",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorTest\\headers\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          },
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-Og",
+              "-g"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      }
+    ],
+    "sourceBinaries": [
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "VendorDriver",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "VendorDriver",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\driver\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "VendorDriverTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorDriverTest\\headers\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "VendorDriverTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "Vendor",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "Vendor",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\native\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "VendorTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorTest\\headers\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "VendorTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-Og",
+          "-g"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      }
+    ],
+    "nameBinaryMap": {
+      "VendorDriverTest": 2,
+      "Vendor": 4,
+      "VendorDriver": 1,
+      "VendorTest": 5
+    }
+  },
+  {
+    "name": "linuxathena",
+    "architecture": "arm-v7",
+    "operatingSystem": "linux",
+    "flavor": "default",
+    "buildType": "release",
+    "cppPath": "C:\\Users\\Public\\wpilib\\2024\\roborio\\bin\\arm-frc2024-linux-gnueabi-g++.exe",
+    "cPath": "C:\\Users\\Public\\wpilib\\2024\\roborio\\bin\\arm-frc2024-linux-gnueabi-gcc.exe",
+    "msvc": false,
+    "gcc": true,
+    "systemCppMacros": [],
+    "systemCppArgs": [],
+    "systemCMacros": [],
+    "systemCArgs": [],
+    "allLibFiles": [
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\c5f7ccae60e03d635052fb75f9d8d250\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\36eddd9da63594003f8cc0946b4ff32e\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b4d229156fa4d27a6941091f4e528b17\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\13c327f81ff44b83ebbd4a07515bb470\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\78dce87e75fb143a7e1dad8b1f962c03\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43b4a27927f6a5a005f4cd18017ba286\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\60b75a807ef62e0671e725a652cc383a\\transformed\\googletest-1.14.0-1-sources\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+    ],
+    "allLibSources": [
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\c5f7ccae60e03d635052fb75f9d8d250\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\36eddd9da63594003f8cc0946b4ff32e\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b4d229156fa4d27a6941091f4e528b17\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\13c327f81ff44b83ebbd4a07515bb470\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\78dce87e75fb143a7e1dad8b1f962c03\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43b4a27927f6a5a005f4cd18017ba286\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-sources\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\60b75a807ef62e0671e725a652cc383a\\transformed\\googletest-1.14.0-1-sources\\"
+    ],
+    "allLibHeaders": [
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+      "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+      "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+    ],
+    "binaries": [
+      {
+        "componentName": "VendorDriver",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+        ],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "componentName": "VendorDriver",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "componentName": "VendorDriverTest",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorDriverTest\\headers\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          },
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\embeddedJniHeaders\\arm-linux-jni\\linux\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\build\\generated\\sources\\headers\\java\\main\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "componentName": "Vendor",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+        ],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "componentName": "Vendor",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "componentName": "VendorTest",
+        "sourceSets": [
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorTest\\headers\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          },
+          {
+            "source": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+              ],
+              "includes": [
+                "**/*.cpp"
+              ],
+              "excludes": []
+            },
+            "exportedHeaders": {
+              "srcDirs": [
+                "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+              ],
+              "includes": [],
+              "excludes": []
+            },
+            "cpp": true,
+            "args": [
+              "-Werror",
+              "-Wall",
+              "-Wextra",
+              "-std=c++20",
+              "-Wformat=2",
+              "-pedantic",
+              "-Wno-psabi",
+              "-Wno-unused-parameter",
+              "-fPIC",
+              "-pthread",
+              "-Wno-error=deprecated-enum-enum-conversion",
+              "-O2"
+            ],
+            "macros": []
+          }
+        ],
+        "libHeaders": [
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\43ab25484eccafc93ad7fd9b5c8fdefe\\transformed\\wpilibc-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\6648d37d785bdeb7563eef042fe8fc55\\transformed\\ntcore-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\0dcc80ee94b250ea2840b34a9027dbcb\\transformed\\hal-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\b48ab91cc3d90eadc151c38e09ac546c\\transformed\\wpimath-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f404d8cd89a45eb51d343dcb2bfdc5ae\\transformed\\wpinet-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\2e40e3379d2694669d2ba9271f3f30a4\\transformed\\wpiutil-cpp-2024.3.2-89-ga6dd95e-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5ff2fbe282a5063bcbc0666e9715bc3a\\transformed\\netcomm-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\5923222812d145a609d9b88d4d0227ee\\transformed\\chipobject-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\f2fd15a0bcfa7411bda2e85f4eb73885\\transformed\\visa-2024.2.1-headers\\",
+          "C:\\Users\\aneur\\.gradle\\caches\\transforms-3\\bad96784e7f46bcbee3a26a091dfafca\\transformed\\googletest-1.14.0-1-headers\\",
+          "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+        ],
+        "sharedLibrary": false,
+        "executable": false
+      }
+    ],
+    "sourceBinaries": [
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "VendorDriver",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\driver\\include\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "VendorDriver",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\driver\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "VendorDriverTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorDriverTest\\headers\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "VendorDriverTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "Vendor",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\main\\native\\include\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "Vendor",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": true,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\test\\native\\cpp\\"
+          ],
+          "includes": [
+            "**/*.cpp"
+          ],
+          "excludes": []
+        },
+        "componentName": "VendorTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      },
+      {
+        "source": {
+          "srcDirs": [
+            "D:\\Files\\FRC6201\\2024-CODE\\Crewmate\\src\\VendorTest\\headers\\"
+          ],
+          "includes": [],
+          "excludes": []
+        },
+        "componentName": "VendorTest",
+        "cpp": true,
+        "args": [
+          "-Werror",
+          "-Wall",
+          "-Wextra",
+          "-std=c++20",
+          "-Wformat=2",
+          "-pedantic",
+          "-Wno-psabi",
+          "-Wno-unused-parameter",
+          "-fPIC",
+          "-pthread",
+          "-Wno-error=deprecated-enum-enum-conversion",
+          "-O2"
+        ],
+        "macros": [],
+        "sharedLibrary": false,
+        "executable": false
+      }
+    ],
+    "nameBinaryMap": {
+      "VendorDriverTest": 2,
+      "Vendor": 4,
+      "VendorDriver": 1,
+      "VendorTest": 5
+    }
+  }
+]
