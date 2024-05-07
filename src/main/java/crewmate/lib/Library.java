@@ -1,6 +1,6 @@
 package crewmate.lib;
 
-public class Test {
+public class Library {
     public boolean connected(){
         return true;
     }
