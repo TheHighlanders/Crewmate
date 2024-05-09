@@ -5,6 +5,6 @@ import org.junit.jupiter.api.*;
 public class TestClass {
     @Test
     public void method(){
-        Assertions.assertTrue(Library.connected(), "Library Is Connected");
+        Assertions.assertTrue(crewmate.lib.Library.connected(), "Library Is Connected");
     }
 }
