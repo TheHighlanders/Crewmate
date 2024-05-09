@@ -1,1 +1,0 @@
-memberSearchIndex = [{"p":"crewmate.lib","c":"Library","l":"connected()"},{"p":"crewmate.lib","c":"Library","l":"Library()","u":"%3Cinit%3E()"}];updateSearchResults();
