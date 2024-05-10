@@ -5,16 +5,18 @@ enum Controller{
     SPARKMAX,
     TALONFX
 }
-
+/**
+ * Blank Interface for creation of hardware specific motor implementations to use
+ */
 public interface CrewmateMotor {
     /** 
      * Base Method to set throttle to a motor
-     * @param throttle
+     * @param throttle (-1 to 1)
      */
     public void set(double throttle);
     /**
      * Base Method to set voltage to a motor
-     * @param voltage
+     * @param voltage the voltage to supply to a motor
      */
     public void setVoltage(double voltage);
 
