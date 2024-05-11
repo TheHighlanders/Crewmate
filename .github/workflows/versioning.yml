@@ -25,6 +25,11 @@ jobs:
         ref: ${{ github.head_ref }}
         fetch-depth: 0
 
+    - name: Debug
+      run: |
+        pwd
+        ls
+
     - name: Find and increment version
       id: version
       run: |
