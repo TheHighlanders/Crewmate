@@ -33,12 +33,6 @@ public interface CrewmateMotor {
     public double getVelocity();
 
     /**
-     * Base Method to get voltage of a motor
-     * @return Voltage of a motor
-     */
-    public double getVoltage();
-
-    /**
      * Base Method to get the current draw (A) of a motor
      * @return Amps drawn
      */
@@ -49,4 +43,54 @@ public interface CrewmateMotor {
      * @return Controller Enum, representing different hardware types
      */
     public Controller getControllerType();
+
+    /**
+     * Sets the Proportional gain
+     * @param p gain value
+     */
+    public void setP(double p);
+    /**
+     * Sets the Integral gaim
+     * @param i gain value
+     */
+    public void setI(double i);
+    /**
+     * Sets the Derivative gain
+     * @param d gain value
+     */
+    public void setD(double d);
+
+    /**
+     * Gets the current Proportional gain value
+     * @return P gain value
+     */
+    public double getP();
+    /**
+     * Gets the current Integral gain value
+     * @return I gain value
+     */
+    public double getI();
+    /**
+     * Gets the current Derivative gain value
+     * @return D gain value
+     */
+    public double getD();
+
+    /**
+     * Sets the PID control setpoint
+     * @param setpoint desired setpoint
+     * @param controlType how to control the motor
+     */
+    public void setSetpoint(double setpoint, MotorConfig.ControlType controlType);
+    /**
+     * Gets the current setpoint
+     * @return current setpoint
+     */
+    public double getSetpoint();
+
+    /**
+     * Sets a current limit on the motor
+     * @param limit current to limit to
+     */
+    public void setCurrentLimit(double limit);
 }
