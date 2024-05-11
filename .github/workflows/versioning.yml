@@ -1,24 +1,41 @@
 name: Release
-
+# TODO: rename main
 on:
-  release:
-    types: [created]
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-
   release:
     runs-on: ubuntu-latest
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Get next version
-      uses: reecetech/version-increment@2024.4.3
+    - name: Find and increment version
       id: version
+      run: |
+        current_version=$(grep -oP "pubVersion = '\K\d+\.\d+\.\d+" publish.gradle)
+        IFS='.' read -ra version_parts <<< "$current_version"
+        ((version_parts[2]++))
+        new_version="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
+        echo "New version: $new_version"
+        echo "export NEW_VERSION=$new_version" >> $GITHUB_ENV
+
+    - name: Update version in publish.gradle
+      run: sed -i "s/pubVersion = '.*'/pubVersion = '$NEW_VERSION'/" publish.gradle
+
+    - name: Commit version increment
+      run: |
+        git config user.email ${{ secrets.EMAIL }}
+        git config user.name ${{ secrets.NAME }}
+        git commit -m "Increment version to $NEW_VERSION"
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.8.0
       with:
-        scheme: semver
-        increment: minor
+        github_token: ${{ secrets.GITHUB_TOKEN }}
 
     # Build your project and package the binaries here
     - name: Build
@@ -31,8 +48,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag: ${{ steps.version.outputs.version }}
-        name: ${{ steps.version.outputs.version }}
+        tag: ${{ env.NEW_VERSION }}
+        name: ${{ env.NEW_VERSION }}
         publish: true
         prerelease: true
 
@@ -41,6 +58,6 @@ jobs:
       with:
         name: Artifacts
         path: |
-            build\repos\releases\crewmate\lib\Crewmate-java\0.0.1\*.jar
-            build\repos\releases\crewmate\lib\Crewmate-java\0.0.1\*.pom
+            build\repos\releases\crewmate\lib\Crewmate-java\$NEW_VERSION\*.jar
+            build\repos\releases\crewmate\lib\Crewmate-java\$NEW_VERSION\*.pom
 
