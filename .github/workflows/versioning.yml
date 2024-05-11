@@ -6,8 +6,17 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+
 jobs:
   release:
+    permissions:
+      # write permission is required to create a github release
+      contents: write
+      # write permission is required for autolabeler
+      # otherwise, read permission is required at least
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -44,9 +53,8 @@ jobs:
         
 
     # Build your project and package the binaries here
-    - name: Build
+    - name: Publish
       run: |
-        ./gradlew build
         ./gradlew publish
 
     - name: Create Release
