@@ -2,7 +2,7 @@ name: Release
 # TODO: rename main
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "Workflows" ]
   pull_request:
     branches: [ "main" ]
 
@@ -21,7 +21,7 @@ jobs:
         ((version_parts[2]++))
         new_version="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
         echo "New version: $new_version"
-        echo "export NEW_VERSION=$new_version" >> $GITHUB_ENV
+        echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
 
     - name: Update version in publish.gradle
       run: sed -i "s/pubVersion = '.*'/pubVersion = '$NEW_VERSION'/" publish.gradle
@@ -30,7 +30,7 @@ jobs:
       run: |
         git config user.email ${{ secrets.EMAIL }}
         git config user.name ${{ secrets.NAME }}
-        git commit -m "Increment version to $NEW_VERSION"
+        git commit -m "Increment version to ${{ env.NEW_VERSION }}"
     
     - name: Push changes
       uses: ad-m/github-push-action@v0.8.0
@@ -58,6 +58,6 @@ jobs:
       with:
         name: Artifacts
         path: |
-            build\repos\releases\crewmate\lib\Crewmate-java\$NEW_VERSION\*.jar
-            build\repos\releases\crewmate\lib\Crewmate-java\$NEW_VERSION\*.pom
+            build\repos\releases\crewmate\lib\Crewmate-java\${{ env.NEW_VERSION }}\*.jar
+            build\repos\releases\crewmate\lib\Crewmate-java\${{ env.NEW_VERSION }}\*.pom
 
