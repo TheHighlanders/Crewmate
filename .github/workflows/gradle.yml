@@ -6,13 +6,20 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
 name: Java CI with Gradle
-run: chmod +x ./gradlew
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "Development" ]
+    paths-ignore:
+      - '.github/**'
+      - '.vscode/**'
+      - '.wpilib/**'
   pull_request:
-    branches: [ "main" ]
+    branches: [ "Development" ]
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
 
 jobs:
   build:
