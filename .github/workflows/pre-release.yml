@@ -84,13 +84,11 @@ jobs:
       - name: Spotless Apply
         if: ${{ failure() }}
         run: |
-          ./gradlew spotlessApply
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git fetch origin main
           git pull origin main
-          git add .
-          git commit -m "Apply spotless"
+          ./gradlew spotlessApply
 
       - name: Find and increment version
         id: version
@@ -110,8 +108,11 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add publish.gradle
-          git commit -m "Increment version to ${{ env.NEW_VERSION }}"
+          git add .
+          git commit -m "Apply spotless and Increment version to ${{ env.NEW_VERSION }}"
+
+      - name: Publish gradle
+        run: ./gradlew publish
 
       - name: Push changes
         uses: ad-m/github-push-action@v0.8.0
