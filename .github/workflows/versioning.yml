@@ -2,9 +2,9 @@ name: Release
 # TODO: rename main
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -19,15 +19,13 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Debug
-      run: |
-        pwd
-        ls
-        grep -oP "pubVersion = '\K\d+\.\d+\.\d+" publish.gradle
-
-
+      - name: Debug
+        run: |
+          pwd
+          ls
+          grep -oP "pubVersion = '\K\d+\.\d+\.\d+" publish.gradle
