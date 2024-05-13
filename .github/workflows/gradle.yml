@@ -11,7 +11,7 @@ on:
   push:
     branches: ["Development"]
     paths-ignore:
-      - "**/.*" # Exclude all directories starting with a "."
+      - ".*" # Exclude all directories starting with a "."
   pull_request:
     branches: ["Development"]
 
