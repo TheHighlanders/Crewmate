@@ -18,7 +18,8 @@ jobs:
           ./gradlew spotlessApply
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          current_branch=$(git rev-parse --abbrev-ref HEAD)
           git fetch origin
-          git pull origin Workflows
-          git add publish.gradle
+          git pull origin $current_branch
+          git add .
           git commit -m "Apply spotless"
