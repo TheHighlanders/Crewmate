@@ -1,6 +1,6 @@
 on:
   workflow_call:
-  
+
   push:
     branches-ignore:
       - main # Exclude pushes to the main branch
@@ -8,7 +8,8 @@ on:
       - ".*" # Exclude all directories starting with a "."
 jobs:
   spotless-check:
+    uses: ./.github/workflows/spotless-check.yml
+  push:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/spotless-check.yml
       - run: git push
