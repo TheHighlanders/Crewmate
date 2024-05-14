@@ -6,15 +6,13 @@ on:
       - "main"
 
 jobs:
-  version-increment-spotless-check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/workflows/spotless-check.yml
-      - uses: ./.github/workflows/version-increment.yml
+  version-increment:
+    uses: ./.github/workflows/version-increment.yml
+  spotless-check:
+    uses: ./.github/workflows/spotless-check.yml
 
   release:
-    needs: version-increment-spotless-check
+    needs: version-increment
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/release.yml
