@@ -20,28 +20,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/spotless-check.yml
+      - uses: .github/spotless-check.yml
 
   build:
     needs: spotless-check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/build-job.yml
+      - uses: .github/build-job.yml
 
   test:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/test-job.yml
+      - uses: .github/test-job.yml
 
   version-increment:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/version-increment.yml
+      - uses: .github/version-increment.yml
 
   push:
     needs: version-increment
