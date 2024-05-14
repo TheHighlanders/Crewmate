@@ -6,13 +6,20 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
 name: Java CI with Gradle
-run: chmod +x ./gradlew
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "Development" ]
+    paths-ignore:
+      - '.github/**'
+      - '.vscode/**'
+      - '.wpilib/**'
   pull_request:
-    branches: [ "main" ]
+    branches: [ "Development" ]
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -74,3 +81,32 @@ jobs:
     # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
     - name: Generate and submit dependency graph
       uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+
+    - name: Find and increment version
+      id: version
+      run: |
+        current_version=$(grep -oP "pubVersion = '\K\d+\.\d+\.\d+" publish.gradle)
+        IFS='.' read -ra version_parts <<< "$current_version"
+        ((version_parts[2]++))
+        new_version="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
+        echo "New version: $new_version"
+        echo "NEW_VERSION=$new_version" >> $GITHUB_ENV
+
+    - name: Update version in publish.gradle
+      run: sed -i "s/pubVersion = '.*'/pubVersion = '$NEW_VERSION'/" publish.gradle
+
+    - name: Commit version increment
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git fetch origin
+        git pull origin Workflows
+        git add publish.gradle
+        git commit -m "Increment version to ${{ env.NEW_VERSION }}"
+    
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.8.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+
