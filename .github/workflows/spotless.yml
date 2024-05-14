@@ -10,6 +10,7 @@ jobs:
   spotless-check:
     uses: ./.github/workflows/spotless-check.yml
   push:
+    if: ${{ failure() }}
     needs: spotless-check
     runs-on: ubuntu-latest
     steps:
