@@ -8,10 +8,12 @@ on:
 jobs:
   version-increment:
     uses: ./.github/workflows/version-increment.yml
+  
   spotless-check:
     uses: ./.github/workflows/spotless-check.yml
 
   release:
+    if: ${{ failure() }}
     needs: version-increment
     runs-on: ubuntu-latest
     steps:
