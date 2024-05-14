@@ -15,10 +15,6 @@ on:
   pull_request:
     branches: ["Development"]
 
-concurrency:
-  group: "${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}"
-  cancel-in-progress: true
-
 jobs:
   spotless-check:
     uses: ./.github/spotless-check.yml
