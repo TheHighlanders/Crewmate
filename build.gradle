@@ -36,6 +36,7 @@ dependencies {
     implementation 'edu.wpi.first.wpiunits:wpiunits-java:2024.+'
     implementation 'edu.wpi.first.hal:hal-java:2024.+'
     implementation "org.ejml:ejml-simple:0.43.1"
+     implementation 'gov.nist.math:jama:1.0.3'
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.12.4"
     implementation "com.fasterxml.jackson.core:jackson-core:2.12.4"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.12.4"
