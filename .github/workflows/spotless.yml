@@ -1,5 +1,5 @@
 on:
-  workflow_dispatch:
+  workflow_call:
   
   push:
     branches-ignore:
@@ -10,5 +10,5 @@ jobs:
   spotless-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/spotless-check.yml
+      - uses: ./.github/workflows/spotless-check.yml
       - run: git push

@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       new_version:
-        description: "The new version number"
+        type: string
         required: true
 
 jobs:

@@ -1,8 +1,6 @@
 name: "pre-release"
 
 on:
-  workflow_dispatch:
-  
   pull_request:
     branches:
       - "main"
@@ -12,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./.github/spotless-check.yml
-      - uses: ./.github/version-increment.yml
+      - uses: ./.github/workflows/spotless-check.yml
+      - uses: ./.github/workflows/version-increment.yml
 
   release:
     needs: version-increment-spotless-check
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/release.yml
+      - uses: ./.github/workflows/release.yml
         with:
           new_version: ${{ needs.version-increment-spotless-check.outputs.new_version }}
       - run: git push
