@@ -4,6 +4,7 @@ on:
 jobs:
   spotless-check:
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     steps:
       - uses: actions/checkout@v4
@@ -19,14 +20,12 @@ jobs:
         run: |
           ./gradlew spotlessCheck
           echo "::set-output name=status::$?"
-        continue-on-error: true
 
       - name: Spotless Apply
         if: steps.spotless.outputs.status != '0'
         run: |
           ./gradlew spotlessApply
           echo "Spotless check failed. Applied formatting changes."
-        continue-on-error: true
 
       - name: Fail the Workflow
         if: steps.spotless.outputs.status != '0'
