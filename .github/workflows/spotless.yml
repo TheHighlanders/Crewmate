@@ -8,6 +8,5 @@ jobs:
   spotless-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/spotless-check.yml@main
+      - uses: ./.github/spotless-check.yml
       - run: git push

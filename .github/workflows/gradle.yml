@@ -35,6 +35,13 @@ jobs:
     needs: test
     uses: ./.github/version-increment.yml
 
+  push:
+    needs: version-increment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: git push
+
   dependency-submission:
     runs-on: ubuntu-latest
     permissions:
@@ -48,7 +55,5 @@ jobs:
           java-version: "17"
           distribution: "temurin"
 
-      # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
-      # See: https://github.com/gradle/actions/blob/main/dependency-submission/README.md
       - name: Generate and submit dependency graph
-        uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
+        uses: gradle/actions/dependency-submission@417ae3ccd767c252f5661f1ace9f835f9654f2b5

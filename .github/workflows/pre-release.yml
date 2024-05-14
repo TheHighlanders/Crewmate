@@ -10,24 +10,17 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  spotless-check:
+  version-increment-spotless-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/spotless-check.yml@main
-
-  version-increment:
-    needs: spotless-check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/version-increment.yml@main
+      - uses: ./.github/spotless-check.yml
+      - uses: ./.github/version-increment.yml
 
   release:
-    needs: version-increment
+    needs: version-increment-spotless-check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/release.yml@main
+      - uses: ./.github/release.yml
         with:
-          new_version: ${{ needs.version-increment.outputs.new_version }}
+          new_version: ${{ needs.version-increment-spotless-check.outputs.new_version }}
+      - run: git push
