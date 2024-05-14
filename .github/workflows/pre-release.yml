@@ -11,6 +11,7 @@ jobs:
   version-increment-spotless-check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: ./.github/spotless-check.yml
       - uses: ./.github/version-increment.yml
 

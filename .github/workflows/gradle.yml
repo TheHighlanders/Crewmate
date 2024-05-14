@@ -17,25 +17,36 @@ on:
 
 jobs:
   spotless-check:
-    uses: ./.github/spotless-check.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/spotless-check.yml
 
   build:
     needs: spotless-check
-    uses: ./.github/build-job.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/build-job.yml
 
   test:
     needs: build
-    uses: ./.github/test-job.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/test-job.yml
 
   version-increment:
     needs: test
-    uses: ./.github/version-increment.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/version-increment.yml
 
   push:
     needs: version-increment
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - run: git push
 
   dependency-submission:
