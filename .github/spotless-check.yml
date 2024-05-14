@@ -1,0 +1,30 @@
+name: Spotless Check
+
+on:
+  workflow_call:
+
+jobs:
+  spotless-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - run: ./gradlew spotlessCheck
+        continue-on-error: true
+
+      - name: Spotless Apply
+        nees:
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git fetch origin main
+          git pull origin main
+          ./gradlew spotlessApply
+          git commit -m "Apply Spotless formatting"

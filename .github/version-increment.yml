@@ -1,0 +1,39 @@
+name: Version Increment
+
+on:
+  workflow_call:
+    outputs:
+      new_version:
+        description: "The incremented version number"
+        value: ${{ jobs.version-increment.outputs.new_version }}
+
+jobs:
+  version-increment:
+    runs-on: ubuntu-latest
+
+    outputs:
+      new_version: ${{ steps.version.outputs.new_version }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find and increment version
+        id: version
+        run: |
+          current_version=$(grep -oP "pubVersion = '\K\d+\.\d+\.\d+" publish.gradle)
+          IFS='.' read -ra version_parts <<< "$current_version"
+          ((version_parts[2] = 0))
+          ((version_parts[1]++))
+          new_version="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
+          echo "New version: $new_version"
+          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+
+      - name: Update version in publish.gradle
+        run: sed -i "s/pubVersion = '.*'/pubVersion = '${{ steps.version.outputs.new_version }}'/" publish.gradle
+
+      - name: Commit version increment
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Apply spotless and Increment version to ${{ steps.version.outputs.new_version }}"

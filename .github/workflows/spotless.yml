@@ -5,26 +5,9 @@ on:
     paths-ignore:
       - ".*" # Exclude all directories starting with a "."
 jobs:
-  spotless:
+  spotless-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-java@v4
-        with:
-          java-version: 17
-          distribution: "temurin"
-      - run: ./gradlew spotlessCheck
-        continue-on-error: true
-      - name: Spotless Apply
-        if: ${{ failure() }}
-        run: |
-          ./gradlew spotlessApply
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          current_branch=$(git rev-parse --abbrev-ref HEAD)
-          git fetch origin
-          git pull origin $current_branch
-          git add .
-          git commit -m "Apply spotless"
+      - uses: actions/checkout@v3
+      - uses: ./.github/workflows/spotless-check.yml@main
+      - run: git push
