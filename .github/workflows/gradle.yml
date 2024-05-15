@@ -16,11 +16,6 @@ on:
     branches: ["Development"]
 
 jobs:
-
-  chmod-gradlew:
-    runs-on: ubuntu-latest
-    steps:
-      - run: chmod +x ./gradlew
   
   spotless-check:
     uses: ./.github/workflows/spotless-check.yml
@@ -39,12 +34,12 @@ jobs:
 
   push-git:
     needs: version-increment
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - run: git push
 
   dependency-submission:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
 
