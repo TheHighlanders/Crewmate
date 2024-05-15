@@ -1,17 +1,18 @@
 package crewmate.lib.statemachines.structures;
+
 public class State {
     private String name;
     private Runnable action;
 
-    public State(){
+    public State() {
         name = "Unnamed State";
     }
 
-    public State(String name){
+    public State(String name) {
         this.name = name;
     }
 
-    public State(String name, Runnable action){
+    public State(String name, Runnable action) {
         this.action = action;
     }
 
@@ -19,8 +20,8 @@ public class State {
      * Runs the State's Runnable
      * Called upon entry to the state
      */
-    public void runState(){
-        if(action != null){
+    public void runState() {
+        if (action != null) {
             this.action.run();
         }
     }
@@ -37,12 +38,11 @@ public class State {
         this.action = action;
     }
 
-    public boolean equals(State other){
-        return this.getName()
-         == other.getName();
+    public boolean equals(State other) {
+        return this.getName() == other.getName();
     }
 
-    public String toString(){
+    public String toString() {
         return this.getName();
     }
 }
