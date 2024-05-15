@@ -16,15 +16,6 @@ on:
     branches: ["Development"]
 
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          git init
-          pwd
-          ls
-          cat .git/HEAD
-        
 
   chmod-gradlew:
     runs-on: ubuntu-latest

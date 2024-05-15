@@ -7,6 +7,16 @@ on:
     paths-ignore:
       - ".*" # Exclude all directories starting with a "."
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          git init
+          pwd
+          ls
+          cat .git/HEAD
+
+
   spotless-check:
     uses: ./.github/workflows/spotless-check.yml
   push:
