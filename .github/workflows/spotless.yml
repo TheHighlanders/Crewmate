@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          pwd
+          ls -la
+          git init
           git add .
           git commit -m "Spotless reformat"
           git push origin Workflows
