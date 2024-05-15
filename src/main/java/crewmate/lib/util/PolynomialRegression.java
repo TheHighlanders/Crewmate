@@ -15,14 +15,21 @@ import Jama.Matrix;
 import Jama.QRDecomposition;
 
 /**
- * The {@code PolynomialRegression} class performs a polynomial regression on an set of <em>N</em> data points (
- * <em>y<sub>i</sub></em>, <em>x<sub>i</sub></em>). That is, it fits a polynomial <em>y</em> = &beta;<sub>0</sub> +
- * &beta;<sub>1</sub> <em>x</em> + &beta;<sub>2</sub> <em>x</em><sup>2</sup> + ... + &beta;<sub><em>d</em></sub>
- * <em>x</em><sup><em>d</em></sup> (where <em>y</em> is the response variable, <em>x</em> is the predictor variable, and
- * the &beta;<sub><em>i</em></sub> are the regression coefficients) that minimizes the sum of squared residuals of the
- * multiple regression model. It also computes associated the coefficient of determination <em>R</em><sup>2</sup>.
+ * The {@code PolynomialRegression} class performs a polynomial regression on an
+ * set of <em>N</em> data points (
+ * <em>y<sub>i</sub></em>, <em>x<sub>i</sub></em>). That is, it fits a
+ * polynomial <em>y</em> = &beta;<sub>0</sub> +
+ * &beta;<sub>1</sub> <em>x</em> + &beta;<sub>2</sub> <em>x</em><sup>2</sup> +
+ * ... + &beta;<sub><em>d</em></sub>
+ * <em>x</em><sup><em>d</em></sup> (where <em>y</em> is the response variable,
+ * <em>x</em> is the predictor variable, and
+ * the &beta;<sub><em>i</em></sub> are the regression coefficients) that
+ * minimizes the sum of squared residuals of the
+ * multiple regression model. It also computes associated the coefficient of
+ * determination <em>R</em><sup>2</sup>.
  * <p>
- * This implementation performs a QR-decomposition of the underlying Vandermonde matrix, so it is not the fastest or
+ * This implementation performs a QR-decomposition of the underlying Vandermonde
+ * matrix, so it is not the fastest or
  * most numerically stable way to perform the polynomial regression.
  *
  * @author Robert Sedgewick
@@ -56,13 +63,22 @@ public class PolynomialRegression {
     }
 
     private void solve(double[] x, double[] y, int degree) {
+        if (x.length == 0 || y.length == 0) {
+            throw new IllegalArgumentException("Input data arrays cannot be empty.");
+        }
+
+        if (degree <= 0) {
+            throw new IllegalArgumentException("Degree must be nonzero and cannot be less than 0.");
+        }
+
         this.degree = degree;
 
         int n = x.length;
         QRDecomposition qr = null;
         Matrix matrixX = null;
 
-        // in case Vandermonde matrix does not have full rank, reduce degree until it does
+        // in case Vandermonde matrix does not have full rank, reduce degree until it
+        // does
         while (true) {
 
             // build Vandermonde matrix
@@ -131,7 +147,8 @@ public class PolynomialRegression {
     /**
      * Returns the coefficient of determination <em>R</em><sup>2</sup>.
      *
-     * @return the coefficient of determination <em>R</em><sup>2</sup>, which is a real number between 0 and 1
+     * @return the coefficient of determination <em>R</em><sup>2</sup>, which is a
+     *         real number between 0 and 1
      */
     public double R2() {
         if (sst == 0.0)
@@ -140,12 +157,17 @@ public class PolynomialRegression {
     }
 
     /**
-     * Returns the expected response {@code y} given the value of the predictor variable {@code x}.
+     * Returns the expected response {@code y} given the value of the predictor
+     * variable {@code x}.
      *
      * @param x the value of the predictor variable
-     * @return the expected response {@code y} given the value of the predictor variable {@code x}
+     * @return the expected response {@code y} given the value of the predictor
+     *         variable {@code x}
      */
     public double predict(double x) {
+        if (degree < 0) {
+            throw new IllegalStateException("Polynomial regression model is not initialized.");
+        }
         // horner's method
         double y = 0.0;
         for (int j = degree; j >= 0; j--)
