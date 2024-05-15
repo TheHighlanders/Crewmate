@@ -15,7 +15,7 @@ jobs:
   release:
     if: ${{ failure() }}
     needs: version-increment
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/release.yml
         with:

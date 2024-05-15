@@ -34,12 +34,12 @@ jobs:
 
   push-git:
     needs: version-increment
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - run: git push
 
   dependency-submission:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
