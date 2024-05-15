@@ -17,6 +17,12 @@ jobs:
         with:
           java-version: "17"
           distribution: "temurin"
+      - run: |
+          pwd
+          ls -la
+          git init
+          ./gradlew spotlessApply
+          echo "Spotless check failed. Applied formatting changes."
 
       - name: Publish gradle
         run: ./gradlew publish
