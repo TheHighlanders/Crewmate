@@ -10,7 +10,9 @@ jobs:
   make-repo-safe:
     runs-on: ubuntu-latest
     steps:
-      - run: git config --global --add safe.directory $(realpath .)
+      - run: |
+         git init
+         git config --global --add safe.directory $(realpath .)
   spotless-check:
     uses: ./.github/workflows/spotless-check.yml
   push:
