@@ -17,14 +17,13 @@ jobs:
         id: spotless
         run: |
           ./gradlew spotlessCheck
-          echo "::set-output name=status::$?"
 
       - name: Spotless Apply
-        if: steps.spotless.outputs.status != '0' && '!cancelled()'
+        if: ${{ failure() }}
         run: |
           ./gradlew spotlessApply
           echo "Spotless check failed. Applied formatting changes."
 
       - name: Fail the Workflow
-        if: steps.spotless.outputs.status != '0' && '!cancelled()'
+        if: ${{ failure() }}
         run: exit 1
