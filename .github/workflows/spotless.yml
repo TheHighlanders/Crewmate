@@ -1,0 +1,35 @@
+on:
+  workflow_call:
+
+  push:
+    branches-ignore:
+      - main # Exclude pushes to the main branch
+    paths-ignore:
+      - ".*" # Exclude all directories starting with a "."
+jobs:
+  spotless-check:
+    uses: ./.github/workflows/spotless-check.yml
+  push:
+    if: ${{ failure() }}
+    needs: spotless-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+      - run: |
+          pwd
+          ls -la
+          git init
+          ./gradlew spotlessApply
+          echo "Spotless check failed. Applied formatting changes."
+      - uses: EndBug/add-and-commit@v9
+        with:
+          add: "src"
+          default_author: github_actor
+          fetch: true
+          message: "Automatic Spotless format"
+          push: true
