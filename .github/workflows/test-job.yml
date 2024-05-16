@@ -3,6 +3,10 @@ name: Test Job
 on:
   workflow_call:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test-gradle:
     runs-on: ubuntu-latest
