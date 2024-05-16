@@ -116,7 +116,7 @@ public interface CrewmateMotor {
 
   /**
    * Sets the brake mode of the motor
-   * 
+   *
    * @param brake true to brake, false to coast
    */
   public void setBrakeMode(boolean brake);

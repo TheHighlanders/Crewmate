@@ -1,7 +1,7 @@
 package crewmate.lib.motor;
 
-import java.util.Optional;
 import com.revrobotics.CANSparkBase.IdleMode;
+import java.util.Optional;
 
 public class MotorConfig {
   public enum Type {
@@ -53,7 +53,7 @@ public class MotorConfig {
   /**
    * Creates a new MotorConfig for a motor
    *
-   * @param canID     Can ID of the Motor
+   * @param canID Can ID of the Motor
    * @param motorType Brushed or Brushless
    * @return MotorConfig
    */
@@ -72,11 +72,10 @@ public class MotorConfig {
   }
 
   /**
-   * Creates a new MotorConfig for a motor with an attached gearbox Velocity will
-   * be in rpm
+   * Creates a new MotorConfig for a motor with an attached gearbox Velocity will be in rpm
    *
-   * @param canID        Can ID of the Motor
-   * @param motorType    Brushed or Brushless
+   * @param canID Can ID of the Motor
+   * @param motorType Brushed or Brushless
    * @param gearboxRatio Ratio of attached gearboxes (rotation/rotation)
    * @return MotorConfig
    */
