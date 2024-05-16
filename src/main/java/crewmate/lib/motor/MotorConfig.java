@@ -1,6 +1,7 @@
 package crewmate.lib.motor;
 
 import java.util.Optional;
+import com.revrobotics.CANSparkBase.IdleMode;
 
 public class MotorConfig {
   public enum Type {
@@ -17,24 +18,26 @@ public class MotorConfig {
 
   int canID;
   Type motorType;
-  Optional<Double> currentLimit;
+  Optional<Integer> currentLimit;
   Optional<Double> p;
   Optional<Double> i;
   Optional<Double> d;
   Optional<Boolean> reversed;
   Optional<Double> positionConversionFactor;
   Optional<Double> velocityConversionFactor;
+  Optional<IdleMode> idleMode;
 
   public MotorConfig(
       int canID,
       Type motorType,
-      Optional<Double> currentLimit,
+      Optional<Integer> currentLimit,
       Optional<Double> p,
       Optional<Double> i,
       Optional<Double> d,
       Optional<Boolean> reversed,
       Optional<Double> positionConversionFactor,
-      Optional<Double> velocityConversionFactor) {
+      Optional<Double> velocityConversionFactor,
+      Optional<IdleMode> idleMode) {
     this.canID = canID;
     this.motorType = motorType;
     this.currentLimit = currentLimit;
@@ -44,16 +47,17 @@ public class MotorConfig {
     this.reversed = reversed;
     this.positionConversionFactor = positionConversionFactor;
     this.velocityConversionFactor = velocityConversionFactor;
+    this.idleMode = idleMode;
   }
 
   /**
    * Creates a new MotorConfig for a motor
    *
-   * @param canID Can ID of the Motor
+   * @param canID     Can ID of the Motor
    * @param motorType Brushed or Brushless
    * @return MotorConfig
    */
-  public MotorConfig motorBasic(int canID, Type motorType) {
+  public static MotorConfig motorBasic(int canID, Type motorType) {
     return new MotorConfig(
         canID,
         motorType,
@@ -63,14 +67,16 @@ public class MotorConfig {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
-        Optional.empty());
+        Optional.empty(),
+        Optional.of(IdleMode.kCoast));
   }
 
   /**
-   * Creates a new MotorConfig for a motor with an attached gearbox Velocity will be in rpm
+   * Creates a new MotorConfig for a motor with an attached gearbox Velocity will
+   * be in rpm
    *
-   * @param canID Can ID of the Motor
-   * @param motorType Brushed or Brushless
+   * @param canID        Can ID of the Motor
+   * @param motorType    Brushed or Brushless
    * @param gearboxRatio Ratio of attached gearboxes (rotation/rotation)
    * @return MotorConfig
    */
@@ -84,7 +90,8 @@ public class MotorConfig {
         Optional.empty(),
         Optional.empty(),
         Optional.of(gearboxRatio),
-        Optional.of(gearboxRatio / 60.0d));
+        Optional.of(gearboxRatio / 60.0d),
+        Optional.of(IdleMode.kCoast));
   }
 
   public static MotorConfig motorPID(
@@ -98,7 +105,8 @@ public class MotorConfig {
         Optional.of(d),
         Optional.empty(),
         Optional.of(gearboxRatio),
-        Optional.of(gearboxRatio / 60.0d));
+        Optional.of(gearboxRatio / 60.0d),
+        Optional.of(IdleMode.kCoast));
   }
 
   public MotorConfig setReversed(boolean reversed) {
@@ -106,7 +114,7 @@ public class MotorConfig {
     return this;
   }
 
-  public MotorConfig setCurrentLimit(double currentLimit) {
+  public MotorConfig setCurrentLimit(int currentLimit) {
     this.currentLimit = Optional.of(currentLimit);
     return this;
   }

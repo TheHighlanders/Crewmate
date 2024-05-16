@@ -6,6 +6,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import crewmate.lib.motor.MotorConfig.ControlType;
 import java.util.Optional;
+import com.revrobotics.CANSparkBase.IdleMode;
 
 public class CrewmateSparkMax implements CrewmateMotor {
   private CANSparkMax controller;
@@ -14,34 +15,45 @@ public class CrewmateSparkMax implements CrewmateMotor {
   private SparkPIDController pid;
   private double setpoint;
 
-  public CrewmateSparkMax(int canID, MotorType motorType) {
-    controller = new CANSparkMax(canID, motorType);
-    encoder = controller.getEncoder();
+  public CrewmateSparkMax(MotorConfig config) {
+    controller = new CANSparkMax(
+        config.canID,
+        switch (config.motorType) {
+          case BRUSHLESS -> MotorType.kBrushless;
+          case BRUSHED -> MotorType.kBrushed;
+        });
 
+    encoder = controller.getEncoder();
     pid = controller.getPIDController();
+
+    config.p.ifPresent(this::setP);
+    config.i.ifPresent(this::setI);
+    config.d.ifPresent(this::setD);
+    config.currentLimit.ifPresent(this::setCurrentLimit);
+    controller.setInverted(config.reversed.orElse(false));
+    config.positionConversionFactor.ifPresent(encoder::setPositionConversionFactor);
+    config.velocityConversionFactor.ifPresent(encoder::setVelocityConversionFactor);
+    config.idleMode.ifPresent(controller::setIdleMode);
+
+    setpoint = 0;
+
+    controller.restoreFactoryDefaults();
+    controller.setCANTimeout(250); // These could be a config options but decided they would never get used
+    controller.enableVoltageCompensation(12);
+    controller.setSmartCurrentLimit(30);
+    //controller.setSecondaryCurrentLimit(40);
+    controller.setOpenLoopRampRate(0.2); 
+    controller.setClosedLoopRampRate(0.2);
+    encoder.setPosition(setpoint);
+    encoder.setAverageDepth(2);
+    controller.setCANTimeout(0);
+    controller.burnFlash();
   }
 
-  public CrewmateSparkMax(MotorConfig config) {
-    controller =
-        new CANSparkMax(
-            config.canID,
-            switch (config.motorType) {
-              case BRUSHLESS:
-                yield MotorType.kBrushless;
-              case BRUSHED:
-                yield MotorType.kBrushed;
-            });
-
-    encoder = controller.getEncoder();
-    pid = controller.getPIDController();
-
-    setP(config.p);
-    setI(config.i);
-    setD(config.d);
-
-    setCurrentLimit(config.currentLimit);
-
-    setInverted(config.reversed);
+  public CrewmateSparkMax(int canID, MotorType motorType) {
+    this(MotorConfig.motorBasic(
+        canID,
+        motorType == MotorType.kBrushless ? MotorConfig.Type.BRUSHLESS : MotorConfig.Type.BRUSHED));
   }
 
   @Override
@@ -154,13 +166,18 @@ public class CrewmateSparkMax implements CrewmateMotor {
   }
 
   @Override
-  public void setCurrentLimit(double limit) {
-    controller.setSmartCurrentLimit((int) limit);
+  public void setCurrentLimit(int limit) {
+    controller.setSmartCurrentLimit(limit);
   }
 
-  public void setCurrentLimit(Optional<Double> limit) {
+  public void setCurrentLimit(Optional<Integer> limit) {
     if (limit.isPresent()) {
       this.setCurrentLimit(limit.get());
     }
+  }
+
+  @Override
+  public void setBrakeMode(boolean brakeMode) {
+    controller.setIdleMode(brakeMode ? IdleMode.kBrake : IdleMode.kCoast);
   }
 }

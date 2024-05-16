@@ -112,5 +112,12 @@ public interface CrewmateMotor {
    *
    * @param limit current to limit to
    */
-  public void setCurrentLimit(double limit);
+  public void setCurrentLimit(int limit);
+
+  /**
+   * Sets the brake mode of the motor
+   * 
+   * @param brake true to brake, false to coast
+   */
+  public void setBrakeMode(boolean brake);
 }
