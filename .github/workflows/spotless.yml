@@ -7,23 +7,16 @@ on:
     paths-ignore:
       - ".*" # Exclude all directories starting with a "."
 jobs:
-  debug:
-    runs-on: ubuntu-24.04
+  make-repo-safe:
+    runs-on: ubuntu-latest
     steps:
-      - run: ls
-
-  chmod-gradlew:
-    runs-on: ubuntu-24.04
-    steps:
-      - run: chmod +x ./gradlew
-
+      - run: git config --global --add safe.directory $(realpath .)
   spotless-check:
-    needs: chmod-gradlew
     uses: ./.github/workflows/spotless-check.yml
   push:
     if: ${{ failure() }}
     needs: spotless-check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - uses: EndBug/add-and-commit@v9
         with:
