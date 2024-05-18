@@ -1,12 +1,12 @@
 package crewmate.lib.motor;
 
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import crewmate.lib.motor.MotorConfig.ControlType;
 import java.util.Optional;
-import com.revrobotics.CANSparkBase.IdleMode;
 
 public class CrewmateSparkMax implements CrewmateMotor {
   private CANSparkMax controller;
@@ -16,12 +16,13 @@ public class CrewmateSparkMax implements CrewmateMotor {
   private double setpoint;
 
   public CrewmateSparkMax(MotorConfig config) {
-    controller = new CANSparkMax(
-        config.canID,
-        switch (config.motorType) {
-          case BRUSHLESS -> MotorType.kBrushless;
-          case BRUSHED -> MotorType.kBrushed;
-        });
+    controller =
+        new CANSparkMax(
+            config.canID,
+            switch (config.motorType) {
+              case BRUSHLESS -> MotorType.kBrushless;
+              case BRUSHED -> MotorType.kBrushed;
+            });
 
     encoder = controller.getEncoder();
     pid = controller.getPIDController();
@@ -38,11 +39,12 @@ public class CrewmateSparkMax implements CrewmateMotor {
     setpoint = 0;
 
     controller.restoreFactoryDefaults();
-    controller.setCANTimeout(250); // These could be a config options but decided they would never get used
+    controller.setCANTimeout(
+        250); // These could be a config options but decided they would never get used
     controller.enableVoltageCompensation(12);
     controller.setSmartCurrentLimit(30);
-    //controller.setSecondaryCurrentLimit(40);
-    controller.setOpenLoopRampRate(0.2); 
+    // controller.setSecondaryCurrentLimit(40);
+    controller.setOpenLoopRampRate(0.2);
     controller.setClosedLoopRampRate(0.2);
     encoder.setPosition(setpoint);
     encoder.setAverageDepth(2);
@@ -51,9 +53,12 @@ public class CrewmateSparkMax implements CrewmateMotor {
   }
 
   public CrewmateSparkMax(int canID, MotorType motorType) {
-    this(MotorConfig.motorBasic(
-        canID,
-        motorType == MotorType.kBrushless ? MotorConfig.Type.BRUSHLESS : MotorConfig.Type.BRUSHED));
+    this(
+        MotorConfig.motorBasic(
+            canID,
+            motorType == MotorType.kBrushless
+                ? MotorConfig.Type.BRUSHLESS
+                : MotorConfig.Type.BRUSHED));
   }
 
   @Override
