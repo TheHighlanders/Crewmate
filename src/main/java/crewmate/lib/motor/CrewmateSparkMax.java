@@ -33,7 +33,7 @@ public class CrewmateSparkMax implements CrewmateMotor {
     controller.setInverted(config.reversed.orElse(false));
     config.positionConversionFactor.ifPresent(encoder::setPositionConversionFactor);
     config.velocityConversionFactor.ifPresent(encoder::setVelocityConversionFactor);
-    config.idleMode.ifPresent(controller::setIdleMode);
+    setBrakeMode(config.brakeMode.orElse(false));
 
     setpoint = 0;
 

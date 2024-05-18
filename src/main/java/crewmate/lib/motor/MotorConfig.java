@@ -25,7 +25,7 @@ public class MotorConfig {
   Optional<Boolean> reversed;
   Optional<Double> positionConversionFactor;
   Optional<Double> velocityConversionFactor;
-  Optional<IdleMode> idleMode;
+  Optional<Boolean> brakeMode;
 
   public MotorConfig(
       int canID,
@@ -37,7 +37,7 @@ public class MotorConfig {
       Optional<Boolean> reversed,
       Optional<Double> positionConversionFactor,
       Optional<Double> velocityConversionFactor,
-      Optional<IdleMode> idleMode) {
+      Optional<Boolean> brakeMode) {
     this.canID = canID;
     this.motorType = motorType;
     this.currentLimit = currentLimit;
@@ -47,7 +47,7 @@ public class MotorConfig {
     this.reversed = reversed;
     this.positionConversionFactor = positionConversionFactor;
     this.velocityConversionFactor = velocityConversionFactor;
-    this.idleMode = idleMode;
+    this.brakeMode = brakeMode;
   }
 
   /**
@@ -68,7 +68,7 @@ public class MotorConfig {
         Optional.empty(),
         Optional.empty(),
         Optional.empty(),
-        Optional.of(IdleMode.kCoast));
+        Optional.of(false));
   }
 
   /**
@@ -91,7 +91,7 @@ public class MotorConfig {
         Optional.empty(),
         Optional.of(gearboxRatio),
         Optional.of(gearboxRatio / 60.0d),
-        Optional.of(IdleMode.kCoast));
+        Optional.of(false));
   }
 
   public static MotorConfig motorPID(
@@ -106,7 +106,7 @@ public class MotorConfig {
         Optional.empty(),
         Optional.of(gearboxRatio),
         Optional.of(gearboxRatio / 60.0d),
-        Optional.of(IdleMode.kCoast));
+        Optional.of(false));
   }
 
   public MotorConfig setReversed(boolean reversed) {
