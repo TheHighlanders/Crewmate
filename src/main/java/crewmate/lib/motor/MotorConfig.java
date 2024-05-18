@@ -1,6 +1,5 @@
 package crewmate.lib.motor;
 
-import com.revrobotics.CANSparkBase.IdleMode;
 import java.util.Optional;
 
 public class MotorConfig {
