@@ -97,3 +97,22 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+task generateHtmlFromJava {
+    def htmlFile = new File("$buildDir/generated/index.html")
+    project.logger.debug('Working --------------------------------------------------------------------------------')
+    outputs.file htmlFile
+
+    doLast {
+        def javaClass = 'crewmate.lib.HtmlGenerator'
+
+        javaexec {
+            classpath = sourceSets.main.runtimeClasspath
+            mainClass = javaClass
+        }
+    }
+}
+
+build {
+    dependsOn generateHtmlFromJava
+}
