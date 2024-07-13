@@ -1,113 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xbox Controller Diagram</title>
     <style>
+        @property --rotate {
+            syntax: "<angle>";
+            initial-value: 132deg;
+            inherits: false;
+        }
+
+        :root {
+            --card-height: 15vh;
+            --card-width: calc(var(--card-height) / 1.5);
+        }
+
+        html,
         body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
+            overflow: hidden;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #000;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-            position: relative;
+
+        body {
+            display: flex;
+            flex-direction: column;
         }
+
         h1 {
             text-align: center;
             color: #fff;
+            margin: 20px 0;
         }
-        .controller {
+
+        canvas {
+            position: fixed;
+            left: 0;
+            top: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #212534;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            box-sizing: border-box;
+        }
+
+        .grid-container {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 10px;
+            padding: 10px;
+            height: calc(100vh - 60px);
+            box-sizing: border-box;
+            align-items: center;
+        }
+
+        .card {
+            background: #191c29;
+            width: 100%;
+            height: 100%;
+            padding: 3px;
+            position: relative;
+            border-radius: 6px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 30px;
+            text-align: center;
+            font-size: 1em;
+            color: rgb(88 199 250 / 100%);
+            font-family: cursive;
+            transition: color 1s;
         }
-        .controller img {
-            max-width: 100%;
-            height: auto;
+
+
+        .card::before,
+        .card::after {
+            animation: none;
+            opacity: 0;
         }
-        .button-list {
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-between;
+
+        .card:hover {
+            color: rgb(88 199 250 / 0%);
         }
-        .button-list ul {
-            list-style-type: none;
-            padding: 0;
+
+        .card:hover::before,
+        .card:hover::after {
+            animation: spin 2.5s linear infinite;
+            opacity: 1;
         }
-        .button-list li {
-            margin-bottom: 10px;
-            color: #fff;
-        }
-        .button-list li strong {
-            color: #fff;
-        }
-        .line {
+
+        .card::before {
+            content: "";
+            width: 104%;
+            height: 102%;
+            border-radius: 8px;
+            background-image: linear-gradient(var(--rotate),
+                    #5ddcff,
+                    #3c67e3 43%,
+                    #4e00c2);
             position: absolute;
-            background-color: #fff;
-            width: 2px;
+            z-index: -1;
+            top: -1%;
+            left: -2%;
+            transition: opacity 0.5s;
         }
-        .label {
+
+        .card::after {
             position: absolute;
-            background-color: #000;
-            color: #fff;
-            padding: 5px;
-            border-radius: 5px;
-            font-size: 14px;
+            content: "";
+            top: calc(var(--card-height) / 6);
+            left: 0;
+            right: 0;
+            z-index: -1;
+            height: 100%;
+            width: 100%;
+            margin: 0 auto;
+            transform: scale(0.8);
+            filter: blur(calc(var(--card-height) / 6));
+            background-image: linear-gradient(var(--rotate),
+                    #5ddcff,
+                    #3c67e3 43%,
+                    #4e00c2);
+            transition: opacity 0.5s;
+        }
+
+        @keyframes spin {
+            0% {
+                --rotate: 0deg;
+            }
+
+            100% {
+                --rotate: 360deg;
+            }
+        }
+
+        a {
+            color: #212534;
+            text-decoration: none;
+            font-family: sans-serif;
             font-weight: bold;
+            margin-top: 2rem;
         }
     </style>
 </head>
+
 <body>
-        <h1>Xbox Controller Diagram</h1>
-        <div class="controller">
-            <img src="Xbox.png" alt="Xbox Controller">
-        </div>
-        <div class="button-list">
-            <ul>
-                <li><strong>A, B, X, Y Buttons:</strong> Action buttons</li>
-                <li><strong>D-Pad:</strong> Directional pad for navigation</li>
-                <li><strong>Left Stick:</strong> Left analog stick for movement</li>
-                <li><strong>View, Menu Buttons:</strong> Additional buttons for menu navigation</li>
-            </ul>
-            <ul>
-                <li><strong>Right Stick:</strong> Right analog stick for camera control</li>
-                <li><strong>LB, RB:</strong> Left and right bumpers</li>
-                <li><strong>LT, RT:</strong> Left and right triggers</li>
-                <li><strong>Xbox Button:</strong> Guide button for accessing the Xbox menu</li>
-            </ul>
-        </div>
-        <!-- Lines and Labels -->
-        <div class="line" style="height: 100px; top: 200px; left: 0;"></div>
-        <div class="label" style="top: 180px; left: 10px;">A, B, X, Y Buttons</div>
+    <h1>Xbox Controller Diagram</h1>
+    <canvas id="canvas">
+        Your browser doesn't support canvas
+    </canvas>
+    <div class="grid-container">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+    </div>
+    <script>
+        onload = (e) => {
 
-        <div class="line" style="height: 80px; top: 220px; left: 0;"></div>
-        <div class="label" style="top: 200px; left: 10px;">D-Pad</div>
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            let background = new Image();
+            background.src = "Xbox.png"
 
-        <div class="line" style="height: 120px; top: 180px; left: 0;"></div>
-        <div class="label" style="top: 160px; left: 10px;">Left Stick</div>
+            const buttonMap = new Map();
 
-        <div class="line" style="height: 80px; top: 220px; left: 0;"></div>
-        <div class="label" style="top: 200px; left: 10px;">View, Menu Buttons</div>
+            function drawInCenter() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        <div class="line" style="height: 120px; top: 180px; right: 0;"></div>
-        <div class="label" style="top: 160px; right: 10px;">Right Stick</div>
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
 
-        <div class="line" style="height: 60px; top: 240px; right: 0;"></div>
-        <div class="label" style="top: 220px; right: 10px;">LB, RB</div>
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
 
-        <div class="line" style="height: 60px; top: 240px; right: 0;"></div>
-        <div class="label" style="top: 220px; right: 10px;">LT, RT</div>
+                const rectWidth = background.height;
+                const rectHeight = background.width;
 
-        <div class="line" style="height: 100px; top: 200px; right: 0;"></div>
-        <div class="label" style="top: 180px; right: 10px;">Xbox Button</div>
+                buttonMap.set('LeftThumbstick', {
+                    x: -248,
+                    y: 152,
+                    width: 130,
+                    height: 130,
+                })
+
+                buttonMap.set('RightThumbstick', {
+                    x: 128,
+                    y: 5,
+                    width: 130,
+                    height: 130,
+                })
+
+                buttonMap.set('POV', {
+                    x: -130,
+                    y: -5,
+                    width: 140,
+                    height: 140,
+                })
+
+                buttonMap.set('ViewButton', {
+                    x: -70.5,
+                    y: 152,
+                    width: 40,
+                    height: 40,
+                })
+
+                buttonMap.set('ViewButton', {
+                    x: -70.5,
+                    y: 152,
+                    width: 40,
+                    height: 40,
+                })
+
+                buttonMap.set('ShareButton', {
+                    x: 70.5,
+                    y: 151.5,
+                    width: 40,
+                    height: 40,
+                })
+
+                buttonMap.set('Y', {
+                    x: 250,
+                    y: 218,
+                    width: 60,
+                    height: 60,
+                })
+
+                buttonMap.set('A', {
+                    x: 250,
+                    y: 85,
+                    width: 60,
+                    height: 60,
+                })
+
+                buttonMap.set('X', {
+                    x: 182,
+                    y: 151.5,
+                    width: 60,
+                    height: 60,
+                })
+
+                buttonMap.set('B', {
+                    x: 320,
+                    y: 151.5,
+                    width: 60,
+                    height: 60,
+                })
+
+                buttonMap.set('LeftBumper', {
+                    x: -280,
+                    y: 280,
+                    width: 200,
+                    height: 60,
+                })
+
+                buttonMap.set('RightBumper', {
+                    x: 280,
+                    y: 280,
+                    width: 200,
+                    height: 60,
+                })
+
+                buttonMap.set('LeftTrigger', {
+                    x: -280,
+                    y: 350,
+                    width: 200,
+                    height: 60,
+                })
+
+                buttonMap.set('RightTrigger', {
+                    x: 280,
+                    y: 350,
+                    width: 200,
+                    height: 60,
+                })
+
+
+
+
+                ctx.drawImage(background, centerX - rectHeight / 2, centerY - rectWidth / 2);
+
+                for (const [key, rect] of buttonMap) {
+                    ctx.rect(centerX - rect.width / 2 + rect.x, centerY - rect.height / 2 - rect.y, rect.width, rect.height);
+                    // ctx.fillStyle = "red";
+                    // ctx.fill();
+                }
+
+
+            }
+
+            function getMousePos(e) {
+                var rect = canvas.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top,
+                };
+            }
+
+            function isInside(pos) {
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+
+                for (const [key, rect] of buttonMap) {
+                    const adjustedRect = {
+                        x: centerX - rect.width / 2 + rect.x,
+                        y: centerY - rect.height / 2 - rect.y,
+                        width: rect.width,
+                        height: rect.height
+                    };
+
+                    if (pos.x > adjustedRect.x && pos.x < adjustedRect.x + adjustedRect.width &&
+                        pos.y > adjustedRect.y && pos.y < adjustedRect.y + adjustedRect.height) {
+                        return key;
+                    }
+                }
+
+                return null;
+            }
+
+            background.onload = function () {
+                drawInCenter()
+            }
+
+            canvas.addEventListener('click', function (evt) {
+                var mousePos = getMousePos(evt);
+                var clickedButton = isInside(mousePos);
+
+                if (clickedButton) {
+                    alert('Clicked button: ' + clickedButton);
+                } else {
+                    alert('Clicked outside the buttons');
+                }
+            }, false);
+
+            window.addEventListener('resize', drawInCenter);
+        };
+    </script>
 </body>
+
 </html>
