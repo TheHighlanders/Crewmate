@@ -35,10 +35,11 @@
             margin: 20px 0;
         }
 
-        canvas {
-            position: fixed;
-            left: 0;
-            top: 0;
+        #canvas {
+            grid-column: 2 / 5;
+            grid-row: 2 / 5;
+            width: 100%;
+            height: 100%;
         }
 
         body {
@@ -56,32 +57,46 @@
             position: absolute;
             top: 0px;
             left: 0px;
-            width: 100%;
+            width: 100vw;
+            height: 100vh;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-template-rows: repeat(5, 1fr);
-            gap: 10px;
-            padding: 10px;
-            height: calc(100vh - 60px);
+            gap: 100px;
+            padding: 30px;
             box-sizing: border-box;
             align-items: center;
         }
 
         .card {
             background: #191c29;
-            width: 100%;
-            height: 100%;
-            padding: 3px;
+            padding: 10px;
             position: relative;
             border-radius: 6px;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
             font-size: 1em;
             color: rgb(88 199 250 / 100%);
             font-family: cursive;
             transition: color 1s;
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            z-index: 10;
+        }
+
+        .card-type {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 0.8em;
         }
 
 
@@ -89,10 +104,6 @@
         .card::after {
             animation: none;
             opacity: 0;
-        }
-
-        .card:hover {
-            color: rgb(88 199 250 / 0%);
         }
 
         .card:hover::before,
@@ -158,35 +169,91 @@
 
 <body>
     <h1>Xbox Controller Diagram</h1>
-    <canvas id="canvas">
-        Your browser doesn't support canvas
-    </canvas>
+
     <div class="grid-container">
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
+        <canvas id="canvas">
+            Your browser doesn't support canvas
+        </canvas>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Card 1</h2>
+            <p class="card-type">Type: A</p>
+            <p class="card-description">This is the description of Card 1.</p>
+        </div>
     </div>
     <script>
         onload = (e) => {
@@ -201,8 +268,8 @@
             function drawInCenter() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+                canvas.width = window.innerWidth / 2;
+                canvas.height = window.innerHeight / 2;
 
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
@@ -355,14 +422,11 @@
                 drawInCenter()
             }
 
-            canvas.addEventListener('click', function (evt) {
+            canvas.addEventListener('mousemove', function (evt) {
                 var mousePos = getMousePos(evt);
                 var clickedButton = isInside(mousePos);
-
                 if (clickedButton) {
-                    alert('Clicked button: ' + clickedButton);
-                } else {
-                    alert('Clicked outside the buttons');
+                    console.log(clickedButton)
                 }
             }, false);
 
