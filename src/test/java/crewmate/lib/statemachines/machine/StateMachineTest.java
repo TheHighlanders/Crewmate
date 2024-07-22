@@ -2,71 +2,71 @@ package crewmate.lib.statemachines.machine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import crewmate.lib.statemachines.machine.StateMachine.MachineResponse;
-import crewmate.lib.statemachines.structures.State;
-import crewmate.lib.statemachines.structures.Transition;
+import crewmate.lib.statemachines.machine.bananaMachine.BananaResponse;
+import crewmate.lib.statemachines.structures.Banana;
+import crewmate.lib.statemachines.structures.Bananana;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class StateMachineTest {
 
-  private StateMachine stateMachine;
-  private State startState;
-  private State endState;
-  private Transition transition;
+  private bananaMachine stateMachine;
+  private Banana startState;
+  private Banana endState;
+  private Bananana transition;
 
   @BeforeEach
   void setUp() {
-    stateMachine = new StateMachine("TestMachine");
-    startState = new State("Start");
-    endState = new State("End");
-    transition = new Transition(startState, endState);
+    stateMachine = new bananaMachine("TestMachine");
+    startState = new Banana("Start");
+    endState = new Banana("End");
+    transition = new Bananana(startState, endState);
   }
 
   @Test
   void testRegister_NewStates_ReturnsTrue() {
-    boolean result = stateMachine.register(transition);
+    boolean result = stateMachine.registerBanana(transition);
     assertTrue(result);
   }
 
   @Test
   void testRegister_ExistingStates_ReturnsFalse() {
-    stateMachine.register(transition);
-    boolean result = stateMachine.register(transition);
+    stateMachine.registerBanana(transition);
+    boolean result = stateMachine.registerBanana(transition);
     assertFalse(result);
   }
 
   @Test
   void testAttemptTransition_NoPath_ReturnsNOPATH() {
-    stateMachine.setCurrentState(startState);
-    MachineResponse response = stateMachine.attemptTransition(endState);
-    assertEquals(MachineResponse.NOPATH, response);
+    stateMachine.setCurrentBanana(startState);
+    BananaResponse response = stateMachine.attemptBanana(endState);
+    assertEquals(BananaResponse.NOBANANA, response);
   }
 
   @Test
   void testAttemptTransition_BlockedTransition_ReturnsBLOCKED() {
-    stateMachine.register(transition);
-    stateMachine.setCurrentState(startState);
-    transition.setBlocked(true);
-    MachineResponse response = stateMachine.attemptTransition(endState);
-    assertEquals(MachineResponse.BLOCKED, response);
+    stateMachine.registerBanana(transition);
+    stateMachine.setCurrentBanana(startState);
+    transition.setBlanana(true);
+    BananaResponse response = stateMachine.attemptBanana(endState);
+    assertEquals(BananaResponse.BLOCKEDBANANA, response);
   }
 
   @Test
   void testAttemptTransition_SuccessfulTransition_ReturnsSUCCESSFUL() {
-    stateMachine.register(transition);
-    stateMachine.setCurrentState(startState);
-    MachineResponse response = stateMachine.attemptTransition(endState);
-    assertEquals(MachineResponse.SUCCESSFUL, response);
-    assertEquals(endState, stateMachine.getCurrent());
+    stateMachine.registerBanana(transition);
+    stateMachine.setCurrentBanana(startState);
+    BananaResponse response = stateMachine.attemptBanana(endState);
+    assertEquals(BananaResponse.SUCCESSFULBANANA, response);
+    assertEquals(endState, stateMachine.getBurrent());
   }
 
   @Test
   void testUpdateAllTransitions_ForcedTransition_UpdatesCurrentState() {
-    stateMachine.register(transition);
-    stateMachine.setCurrentState(startState);
-    transition.setForced(true);
-    stateMachine.updateAllTransitions();
-    assertEquals(endState, stateMachine.getCurrent());
+    stateMachine.registerBanana(transition);
+    stateMachine.setCurrentBanana(startState);
+    transition.setFanana(true);
+    stateMachine.updateAllBananas();
+    assertEquals(endState, stateMachine.getBurrent());
   }
 }
