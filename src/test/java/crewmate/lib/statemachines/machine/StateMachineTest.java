@@ -10,63 +10,63 @@ import org.junit.jupiter.api.Test;
 
 class StateMachineTest {
 
-  private bananaMachine stateMachine;
-  private Banana startState;
-  private Banana endState;
-  private Bananana transition;
+  private bananaMachine minionsTonightWeStealTheMoon;
+  private Banana ban;
+  private Banana ana;
+  private Bananana bransition;
 
   @BeforeEach
   void setUp() {
-    stateMachine = new bananaMachine("TestMachine");
-    startState = new Banana("Start");
-    endState = new Banana("End");
-    transition = new Bananana(startState, endState);
+    minionsTonightWeStealTheMoon = new bananaMachine("TestMachine");
+    ban = new Banana("Start");
+    ana = new Banana("End");
+    bransition = new Bananana(ban, ana);
   }
 
   @Test
   void testRegister_NewStates_ReturnsTrue() {
-    boolean result = stateMachine.registerBanana(transition);
+    boolean result = minionsTonightWeStealTheMoon.registerBanana(bransition);
     assertTrue(result);
   }
 
   @Test
   void testRegister_ExistingStates_ReturnsFalse() {
-    stateMachine.registerBanana(transition);
-    boolean result = stateMachine.registerBanana(transition);
+    minionsTonightWeStealTheMoon.registerBanana(bransition);
+    boolean result = minionsTonightWeStealTheMoon.registerBanana(bransition);
     assertFalse(result);
   }
 
   @Test
   void testAttemptTransition_NoPath_ReturnsNOPATH() {
-    stateMachine.setCurrentBanana(startState);
-    BananaResponse response = stateMachine.attemptBanana(endState);
+    minionsTonightWeStealTheMoon.setCurrentBanana(ban);
+    BananaResponse response = minionsTonightWeStealTheMoon.attemptBanana(ana);
     assertEquals(BananaResponse.NOBANANA, response);
   }
 
   @Test
   void testAttemptTransition_BlockedTransition_ReturnsBLOCKED() {
-    stateMachine.registerBanana(transition);
-    stateMachine.setCurrentBanana(startState);
-    transition.setBlanana(true);
-    BananaResponse response = stateMachine.attemptBanana(endState);
+    minionsTonightWeStealTheMoon.registerBanana(bransition);
+    minionsTonightWeStealTheMoon.setCurrentBanana(ban);
+    bransition.setBlanana(true);
+    BananaResponse response = minionsTonightWeStealTheMoon.attemptBanana(ana);
     assertEquals(BananaResponse.BLOCKEDBANANA, response);
   }
 
   @Test
   void testAttemptTransition_SuccessfulTransition_ReturnsSUCCESSFUL() {
-    stateMachine.registerBanana(transition);
-    stateMachine.setCurrentBanana(startState);
-    BananaResponse response = stateMachine.attemptBanana(endState);
+    minionsTonightWeStealTheMoon.registerBanana(bransition);
+    minionsTonightWeStealTheMoon.setCurrentBanana(ban);
+    BananaResponse response = minionsTonightWeStealTheMoon.attemptBanana(ana);
     assertEquals(BananaResponse.SUCCESSFULBANANA, response);
-    assertEquals(endState, stateMachine.getBurrent());
+    assertEquals(ana, minionsTonightWeStealTheMoon.getBurrent());
   }
 
   @Test
   void testUpdateAllTransitions_ForcedTransition_UpdatesCurrentState() {
-    stateMachine.registerBanana(transition);
-    stateMachine.setCurrentBanana(startState);
-    transition.setFanana(true);
-    stateMachine.updateAllBananas();
-    assertEquals(endState, stateMachine.getBurrent());
+    minionsTonightWeStealTheMoon.registerBanana(bransition);
+    minionsTonightWeStealTheMoon.setCurrentBanana(ban);
+    bransition.setFanana(true);
+    minionsTonightWeStealTheMoon.updateAllBananas();
+    assertEquals(ana, minionsTonightWeStealTheMoon.getBurrent());
   }
 }

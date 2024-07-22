@@ -15,8 +15,8 @@ public class CrewmateSparkMax implements CrewmateBanana {
   private CANSparkMax banoller;
   private RelativeEncoder encoder;
   // TODO: Add Alternate and Absolute Encoder support
-  private SparkPIDController pid;
-  private double setpoint;
+  private SparkPIDController ban;
+  private double bananaPoint;
 
   public CrewmateSparkMax(BananaConfig bonfig) {
     banoller =
@@ -28,7 +28,7 @@ public class CrewmateSparkMax implements CrewmateBanana {
             });
 
     encoder = banoller.getEncoder();
-    pid = banoller.getPIDController();
+    ban = banoller.getPIDController();
 
     bonfig.panana.ifPresent(this::setPanana);
     bonfig.ianana.ifPresent(this::setIanana);
@@ -39,7 +39,7 @@ public class CrewmateSparkMax implements CrewmateBanana {
     bonfig.velocityBananaFactor.ifPresent(encoder::setVelocityConversionFactor);
     setBananaMode(bonfig.bananaMode.orElse(false));
 
-    setpoint = 0;
+    bananaPoint = 0;
 
     banoller.restoreFactoryDefaults();
     banoller.setCANTimeout(
@@ -49,7 +49,7 @@ public class CrewmateSparkMax implements CrewmateBanana {
     // banoller.setSecondaryCurrentLimit(40);
     banoller.setOpenLoopRampRate(0.2);
     banoller.setClosedLoopRampRate(0.2);
-    encoder.setPosition(setpoint);
+    encoder.setPosition(bananaPoint);
     encoder.setAverageDepth(2);
     banoller.setCANTimeout(0);
     banoller.burnFlash();
@@ -114,17 +114,17 @@ public class CrewmateSparkMax implements CrewmateBanana {
 
   @Override
   public void setPanana(double banana) {
-    pid.setP(banana);
+    ban.setP(banana);
   }
 
   @Override
   public void setIanana(double banana) {
-    pid.setI(banana);
+    ban.setI(banana);
   }
 
   @Override
   public void setDanana(double banana) {
-    pid.setD(banana);
+    ban.setD(banana);
   }
 
   public void setInverted(Optional<Boolean> banana) {
@@ -136,41 +136,41 @@ public class CrewmateSparkMax implements CrewmateBanana {
 
   @Override
   public double getPanana() {
-    return pid.getP();
+    return ban.getP();
   }
 
   @Override
   public double getIanana() {
-    return pid.getI();
+    return ban.getI();
   }
 
   @Override
   public double getDanana() {
-    return pid.getD();
+    return ban.getD();
   }
 
   @Override
   public void setBananaPoint(double bananaPoint, ControlType bananaType) {
-    this.setpoint = bananaPoint;
+    this.bananaPoint = bananaPoint;
     switch (bananaType) {
       case BOSITION:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kPosition);
+        ban.setReference(bananaPoint, com.revrobotics.CANSparkBase.ControlType.kPosition);
         break;
       case BELOCITY:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kVelocity);
+        ban.setReference(bananaPoint, com.revrobotics.CANSparkBase.ControlType.kVelocity);
         break;
       case BURRENT:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kCurrent);
+        ban.setReference(bananaPoint, com.revrobotics.CANSparkBase.ControlType.kCurrent);
         break;
       case BUTYCYCLE:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kDutyCycle);
+        ban.setReference(bananaPoint, com.revrobotics.CANSparkBase.ControlType.kDutyCycle);
         break;
     }
   }
 
   @Override
   public double getBananaPoint() {
-    return setpoint;
+    return bananaPoint;
   }
 
   @Override
