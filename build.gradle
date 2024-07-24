@@ -9,35 +9,40 @@ plugins {
     id 'com.diffplug.spotless' version '6.25.0'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 repositories {
     mavenCentral()
 }
+
 if (project.hasProperty('releaseMode')) {
     wpilibRepositories.addAllReleaseRepositories(project)
 } else {
     wpilibRepositories.addAllDevelopmentRepositories(project)
 }
 
-// Apply C++ configuration
 apply from: 'config.gradle'
 
-// Apply Java configuration
 dependencies {
-    implementation 'edu.wpi.first.cscore:cscore-java:2024.+'
-    implementation 'edu.wpi.first.cameraserver:cameraserver-java:2024.+'
-    implementation 'edu.wpi.first.ntcore:ntcore-java:2024.+'
-    implementation 'edu.wpi.first.wpilibj:wpilibj-java:2024.+'
-    implementation 'edu.wpi.first.wpiutil:wpiutil-java:2024.+'
-    implementation 'edu.wpi.first.wpimath:wpimath-java:2024.+'
-    implementation 'edu.wpi.first.wpiunits:wpiunits-java:2024.+'
-    implementation 'edu.wpi.first.hal:hal-java:2024.+'
+    def wpiVersion = '2024.+'
+    implementation "edu.wpi.first.cscore:cscore-java:$wpiVersion"
+    implementation "edu.wpi.first.cameraserver:cameraserver-java:$wpiVersion"
+    implementation "edu.wpi.first.ntcore:ntcore-java:$wpiVersion"
+    implementation "edu.wpi.first.wpilibj:wpilibj-java:$wpiVersion"
+    implementation "edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:$wpiVersion"
+    implementation "edu.wpi.first.wpiutil:wpiutil-java:$wpiVersion"
+    implementation "edu.wpi.first.wpimath:wpimath-java:$wpiVersion"
+    implementation "edu.wpi.first.wpiunits:wpiunits-java:$wpiVersion"
+    implementation "edu.wpi.first.hal:hal-java:$wpiVersion"
     implementation "org.ejml:ejml-simple:0.43.1"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.17.1"
     implementation "com.fasterxml.jackson.core:jackson-core:2.17.1"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.17.2"
     implementation 'edu.wpi.first.thirdparty.frc2024.opencv:opencv-java:4.8.0-2'
 
-    testImplementation('org.junit.platform:junit-platform-launcher:1.10.3')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
 }
@@ -54,13 +59,6 @@ spotless {
             include '**/*.java'
             exclude '**/build/**', '**/build-*/**'
         }
-        toggleOffOn()
-        googleJavaFormat()
-        removeUnusedImports()
-        importOrder()
-        formatAnnotations()
-        trimTrailingWhitespace()
-        endWithNewline()
     }
     groovyGradle {
         target fileTree('.') {
@@ -91,26 +89,38 @@ spotless {
         indentWithSpaces(2)
         endWithNewline()
     }
+    tasks.named('spotlessGroovyGradle').configure {
+        dependsOn tasks.named('javadoc')
+    }
+    tasks.named('spotlessJava').configure {
+        dependsOn tasks.named('javadoc')
+    }
+    tasks.named('spotlessMisc').configure {
+        dependsOn tasks.named('javadoc')
+    }
+    tasks.named('spotlessXml').configure {
+        dependsOn tasks.named('javadoc')
+    }
 }
 
 tasks.named('test') {
-    // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
 
 task generateHtmlFromJava {
-    def htmlFile = new File("$buildDir/generated/index.html")
-    project.logger.debug('Working --------------------------------------------------------------------------------')
+    def htmlFile = file("$buildDir/generated/index.html")
     outputs.file htmlFile
 
     doLast {
-        def javaClass = 'crewmate.lib.HtmlGenerator'
-
         javaexec {
             classpath = sourceSets.main.runtimeClasspath
-            mainClass = javaClass
+            mainClass = 'crewmate.lib.HtmlGenerator'
         }
     }
+}
+
+javadoc {
+    destinationDir = file('docs/')
 }
 
 build {
