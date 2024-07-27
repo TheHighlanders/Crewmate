@@ -1,6 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
 package crewmate.lib;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -12,6 +9,7 @@ import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.Command;
 import java.util.HashMap;
 
 /**
@@ -24,6 +22,20 @@ import java.util.HashMap;
 public class CMController extends CommandGenericHID {
   private final XboxController m_hid;
   private final Map<String, Trigger> triggerMap;
+
+  public static enum TriggerType {
+    ON_TRUE,
+    ON_FALSE,
+    WHILE_TRUE,
+    WHILE_FALSE,
+    TOGGLE_ON_TRUE,
+    TOGGLE_ON_FALSE
+  }
+
+  public static enum Button {
+    A, B, X, Y, LEFT_BUMPER, RIGHT_BUMPER, BACK, START, LEFT_STICK, RIGHT_STICK,
+    LEFT_TRIGGER, RIGHT_TRIGGER
+  }
 
   /**
    * Construct an instance of a controller.
@@ -72,6 +84,51 @@ public class CMController extends CommandGenericHID {
   }
 
   /**
+   * Binds a command to a named trigger with a specified trigger type.
+   * 
+   * @param triggerName The name of the trigger to bind to.
+   * @param command     The command to bind.
+   * @param triggerType The type of trigger binding to use.
+   */
+  public void bind(String triggerName, Command command, TriggerType triggerType) {
+    Trigger trigger = getTrigger(triggerName);
+    if (trigger != null) {
+      switch (triggerType) {
+        case ON_TRUE:
+          trigger.onTrue(command);
+          break;
+        case ON_FALSE:
+          trigger.onFalse(command);
+          break;
+        case WHILE_TRUE:
+          trigger.whileTrue(command);
+          break;
+        case WHILE_FALSE:
+          trigger.whileFalse(command);
+          break;
+        case TOGGLE_ON_TRUE:
+          trigger.toggleOnTrue(command);
+          break;
+        case TOGGLE_ON_FALSE:
+          trigger.toggleOnFalse(command);
+          break;
+      }
+    } else {
+      System.out.println("Warning: Trigger '" + triggerName + "' not found.");
+    }
+  }
+
+  /**
+   * Binds a command to a named trigger with ON_TRUE as the default trigger type.
+   * 
+   * @param triggerName The name of the trigger to bind to.
+   * @param command     The command to bind.
+   */
+  public void bind(String triggerName, Command command) {
+    bind(triggerName, command, TriggerType.ON_TRUE);
+  }
+
+  /**
    * Get the underlying GenericHID object.
    *
    * @return the wrapped GenericHID object
@@ -79,6 +136,16 @@ public class CMController extends CommandGenericHID {
   @Override
   public XboxController getHID() {
     return m_hid;
+  }
+
+
+  /**
+   * Get the trigger map
+   *
+   * @return the trigger map
+   */
+  public Map<String, Trigger> getTriggerMap() {
+    return triggerMap;
   }
 
   /**
@@ -94,6 +161,52 @@ public class CMController extends CommandGenericHID {
     m_hid.setRumble(type, value);
   }
 
+  public Trigger getButtonTrigger(Button button, EventLoop loop) {
+    switch (button) {
+      case A:
+        return m_hid.a(loop).castTo(Trigger::new);
+      case B:
+        return m_hid.b(loop).castTo(Trigger::new);
+      case X:
+        return m_hid.x(loop).castTo(Trigger::new);
+      case Y:
+        return m_hid.y(loop).castTo(Trigger::new);
+      case LEFT_BUMPER:
+        return m_hid.leftBumper(loop).castTo(Trigger::new);
+      case RIGHT_BUMPER:
+        return m_hid.rightBumper(loop).castTo(Trigger::new);
+      case BACK:
+        return m_hid.back(loop).castTo(Trigger::new);
+      case START:
+        return m_hid.start(loop).castTo(Trigger::new);
+      case LEFT_STICK:
+        return m_hid.leftStick(loop).castTo(Trigger::new);
+      case RIGHT_STICK:
+        return m_hid.rightStick(loop).castTo(Trigger::new);
+      default:
+        throw new IllegalArgumentException("Unknown button: " + button);
+    }
+  }
+
+  public Trigger getButtonTrigger(Button button, double threshold, EventLoop loop) {
+    switch (button) {
+      case LEFT_TRIGGER:
+        return m_hid.leftTrigger(threshold, loop).castTo(Trigger::new);
+      case RIGHT_TRIGGER:
+        return m_hid.rightTrigger(threshold, loop).castTo(Trigger::new);
+      default:
+        throw new IllegalArgumentException("Unknown button: " + button);
+    }
+  }
+
+  public Trigger getButtonTrigger(Button button, double threshold) {
+    return getButtonTrigger(button, threshold, CommandScheduler.getInstance().getDefaultButtonLoop());
+  }
+
+  public Trigger getButtonTrigger(Button button) {
+    return getButtonTrigger(button, CommandScheduler.getInstance().getDefaultButtonLoop());
+  }
+
   /**
    * Constructs a Trigger instance around the A button's digital signal.
    *
@@ -104,7 +217,7 @@ public class CMController extends CommandGenericHID {
    * @see #a(EventLoop)
    */
   public Trigger a() {
-    return a(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.A);
   }
 
   /**
@@ -116,7 +229,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger a(EventLoop loop) {
-    return m_hid.a(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.A, loop);
   }
 
   /**
@@ -129,7 +242,7 @@ public class CMController extends CommandGenericHID {
    * @see #b(EventLoop)
    */
   public Trigger b() {
-    return b(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.B);
   }
 
   /**
@@ -141,7 +254,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger b(EventLoop loop) {
-    return m_hid.b(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.B, loop);
   }
 
   /**
@@ -154,7 +267,7 @@ public class CMController extends CommandGenericHID {
    * @see #x(EventLoop)
    */
   public Trigger x() {
-    return x(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.X);
   }
 
   /**
@@ -166,7 +279,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger x(EventLoop loop) {
-    return m_hid.x(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.X, loop);
   }
 
   /**
@@ -179,7 +292,7 @@ public class CMController extends CommandGenericHID {
    * @see #y(EventLoop)
    */
   public Trigger y() {
-    return y(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.Y);
   }
 
   /**
@@ -191,7 +304,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger y(EventLoop loop) {
-    return m_hid.y(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.Y, loop);
   }
 
   /**
@@ -204,7 +317,7 @@ public class CMController extends CommandGenericHID {
    * @see #leftBumper(EventLoop)
    */
   public Trigger leftBumper() {
-    return leftBumper(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.LEFT_BUMPER);
   }
 
   /**
@@ -216,7 +329,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger leftBumper(EventLoop loop) {
-    return m_hid.leftBumper(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.LEFT_BUMPER, loop);
   }
 
   /**
@@ -230,7 +343,7 @@ public class CMController extends CommandGenericHID {
    * @see #rightBumper(EventLoop)
    */
   public Trigger rightBumper() {
-    return rightBumper(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.RIGHT_BUMPER);
   }
 
   /**
@@ -243,7 +356,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger rightBumper(EventLoop loop) {
-    return m_hid.rightBumper(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.RIGHT_BUMPER, loop);
   }
 
   /**
@@ -256,7 +369,7 @@ public class CMController extends CommandGenericHID {
    * @see #back(EventLoop)
    */
   public Trigger back() {
-    return back(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.BACK);
   }
 
   /**
@@ -268,7 +381,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger back(EventLoop loop) {
-    return m_hid.back(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.BACK, loop);
   }
 
   /**
@@ -281,7 +394,7 @@ public class CMController extends CommandGenericHID {
    * @see #start(EventLoop)
    */
   public Trigger start() {
-    return start(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.START);
   }
 
   /**
@@ -293,7 +406,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger start(EventLoop loop) {
-    return m_hid.start(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.START, loop);
   }
 
   /**
@@ -306,7 +419,7 @@ public class CMController extends CommandGenericHID {
    * @see #leftStick(EventLoop)
    */
   public Trigger leftStick() {
-    return leftStick(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.LEFT_STICK);
   }
 
   /**
@@ -318,7 +431,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger leftStick(EventLoop loop) {
-    return m_hid.leftStick(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.LEFT_STICK, loop);
   }
 
   /**
@@ -331,7 +444,7 @@ public class CMController extends CommandGenericHID {
    * @see #rightStick(EventLoop)
    */
   public Trigger rightStick() {
-    return rightStick(CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.RIGHT_STICK);
   }
 
   /**
@@ -343,7 +456,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger rightStick(EventLoop loop) {
-    return m_hid.rightStick(loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.RIGHT_STICK, loop);
   }
 
   /**
@@ -361,7 +474,7 @@ public class CMController extends CommandGenericHID {
    *         threshold, attached to the given event loop
    */
   public Trigger leftTrigger(double threshold, EventLoop loop) {
-    return m_hid.leftTrigger(threshold, loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.LEFT_TRIGGER, threshold, loop);
   }
 
   /**
@@ -380,7 +493,7 @@ public class CMController extends CommandGenericHID {
    *         button loop}.
    */
   public Trigger leftTrigger(double threshold) {
-    return leftTrigger(threshold, CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.LEFT_TRIGGER, threshold);
   }
 
   /**
@@ -412,7 +525,7 @@ public class CMController extends CommandGenericHID {
    *         threshold, attached to the given event loop
    */
   public Trigger rightTrigger(double threshold, EventLoop loop) {
-    return m_hid.rightTrigger(threshold, loop).castTo(Trigger::new);
+    return getButtonTrigger(Button.RIGHT_TRIGGER, threshold, loop);
   }
 
   /**
@@ -431,7 +544,7 @@ public class CMController extends CommandGenericHID {
    *         button loop}.
    */
   public Trigger rightTrigger(double threshold) {
-    return rightTrigger(threshold, CommandScheduler.getInstance().getDefaultButtonLoop());
+    return getButtonTrigger(Button.RIGHT_TRIGGER, threshold);
   }
 
   /**
