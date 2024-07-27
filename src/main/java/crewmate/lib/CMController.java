@@ -6,16 +6,13 @@ package crewmate.lib;
 import edu.wpi.first.wpilibj.XboxController;
 
 import java.util.Map;
-import java.util.function.Supplier;
 
-import crewmate.lib.CMControllerConfig.ActionType;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.event.EventLoop;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import java.util.HashMap;
 
 /**
  * A version of {@link XboxController} with {@link Trigger} factories for
@@ -26,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 @SuppressWarnings("MethodName")
 public class CMController extends CommandGenericHID {
   private final XboxController m_hid;
-  private final Map<Trigger, Map<ActionType, Command>> buttonActions;
+  private final Map<String, Trigger> triggerMap;
 
   /**
    * Construct an instance of a controller.
@@ -37,45 +34,41 @@ public class CMController extends CommandGenericHID {
   public CMController(int port) {
     super(port);
     m_hid = new XboxController(port);
-    this.buttonActions = null;
+    triggerMap = new HashMap<String, Trigger>();
   }
 
-  public CMController(int port, CMControllerConfig config) {
-    super(port);
-    m_hid = new XboxController(port);
-    this.buttonActions = config.getButtonActions();
+  /**
+   * Map triggers to specific names
+   */
+  public void mapTrigger(String triggerName, Trigger trigger) {
+    triggerMap.put(triggerName, trigger);
   }
 
-  public void handleButtonActions() {
-    for (Map.Entry<Trigger, Map<ActionType, Command>> entry : buttonActions.entrySet()) {
-      Trigger trigger = entry.getKey();
-      Map<ActionType, Command> actionMap = entry.getValue();
+  /**
+   * Map triggers to specific names using a map
+   */
+  public void mapTriggers(Map<String, Trigger> triggers) {
+    triggerMap.putAll(triggers);
+  }
 
-      for (Map.Entry<ActionType, Command> actionEntry : actionMap.entrySet()) {
-        ActionType actionType = actionEntry.getKey();
-        Command action = actionEntry.getValue();
-        switch (actionType) {
-          case WHILE_TRUE:
-            trigger.whileTrue(action);
-            break;
-          case WHILE_FALSE:
-            trigger.whileFalse(action);
-            break;
-          case ON_TRUE:
-            trigger.onTrue(action);
-            break;
-          case ON_FALSE:
-            trigger.onFalse(action);
-            break;
-          case TOGGLE_ON_TRUE:
-            trigger.toggleOnTrue(action);
-            break;
-          case TOGGLE_ON_FALSE:
-            trigger.toggleOnFalse(action);
-            break;
-        }
+  /**
+   * Map triggers to specific names using an array of objects
+   */
+  public void mapTriggers(Object[][] mappings) {
+    for (Object[] mapping : mappings) {
+      if (mapping.length == 2 && mapping[0] instanceof String && mapping[1] instanceof Trigger) {
+        String triggerName = (String) mapping[0];
+        Trigger trigger = (Trigger) mapping[1];
+        triggerMap.put(triggerName, trigger);
       }
     }
+  }
+
+  /**
+   * Getter for the mapped triggers
+   */
+  public Trigger getTrigger(String triggerName) {
+    return triggerMap.get(triggerName);
   }
 
   /**
@@ -118,7 +111,7 @@ public class CMController extends CommandGenericHID {
    * Constructs a Trigger instance around the A button's digital signal.
    *
    * @param loop the event loop instance to attach the event to.
-   * @return a Trigger instance representing the A button's digital signal
+   * @return a Trigger instance representing the A button's dmake igital signal
    *         attached
    *         to the given loop.
    */
