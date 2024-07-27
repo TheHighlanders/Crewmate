@@ -57,13 +57,13 @@ spotless {
     java {
         target fileTree('.') {
             include '**/*.java'
-            exclude '**/build/**', '**/build-*/**'
+            exclude '**/build/**', '**/build-*/**', '**/docs*/**'
         }
     }
     groovyGradle {
         target fileTree('.') {
             include '**/*.gradle'
-            exclude '**/build/**', '**/build-*/**'
+            exclude '**/build/**', '**/build-*/**', '**/docs*/**'
         }
         greclipse()
         indentWithSpaces(4)
@@ -73,7 +73,7 @@ spotless {
     format 'xml', {
         target fileTree('.') {
             include '**/*.xml'
-            exclude '**/build/**', '**/build-*/**'
+            exclude '**/build/**', '**/build-*/**', '**/docs*/**'
         }
         eclipseWtp('xml')
         trimTrailingWhitespace()
@@ -83,7 +83,7 @@ spotless {
     format 'misc', {
         target fileTree('.') {
             include '**/*.md', '**/.gitignore'
-            exclude '**/build/**', '**/build-*/**'
+            exclude '**/build/**', '**/build-*/**', '**/docs*/**'
         }
         trimTrailingWhitespace()
         indentWithSpaces(2)
