@@ -183,5 +183,4 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,java,linux,macos,gradle,windows,visualstudiocode
 
-**/docs/
-!src/**/docs/
+**/docs
