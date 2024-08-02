@@ -32,10 +32,7 @@ public class CMController extends CommandGenericHID {
     TOGGLE_ON_FALSE
   }
 
-  public static enum Button {
-    A, B, X, Y, LEFT_BUMPER, RIGHT_BUMPER, BACK, START, LEFT_STICK, RIGHT_STICK,
-    LEFT_TRIGGER, RIGHT_TRIGGER
-  }
+  
 
   /**
    * Construct an instance of a controller.
@@ -161,7 +158,7 @@ public class CMController extends CommandGenericHID {
     m_hid.setRumble(type, value);
   }
 
-  public Trigger getButtonTrigger(Button button, EventLoop loop) {
+  public Trigger getButtonTrigger(XboxButton button, EventLoop loop) {
     switch (button) {
       case A:
         return m_hid.a(loop).castTo(Trigger::new);
@@ -188,7 +185,7 @@ public class CMController extends CommandGenericHID {
     }
   }
 
-  public Trigger getButtonTrigger(Button button, double threshold, EventLoop loop) {
+  public Trigger getButtonTrigger(XboxButton button, double threshold, EventLoop loop) {
     switch (button) {
       case LEFT_TRIGGER:
         return m_hid.leftTrigger(threshold, loop).castTo(Trigger::new);
@@ -199,11 +196,11 @@ public class CMController extends CommandGenericHID {
     }
   }
 
-  public Trigger getButtonTrigger(Button button, double threshold) {
+  public Trigger getButtonTrigger(XboxButton button, double threshold) {
     return getButtonTrigger(button, threshold, CommandScheduler.getInstance().getDefaultButtonLoop());
   }
 
-  public Trigger getButtonTrigger(Button button) {
+  public Trigger getButtonTrigger(XboxButton button) {
     return getButtonTrigger(button, CommandScheduler.getInstance().getDefaultButtonLoop());
   }
 
@@ -217,7 +214,7 @@ public class CMController extends CommandGenericHID {
    * @see #a(EventLoop)
    */
   public Trigger a() {
-    return getButtonTrigger(Button.A);
+    return getButtonTrigger(XboxButton.A);
   }
 
   /**
@@ -229,7 +226,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger a(EventLoop loop) {
-    return getButtonTrigger(Button.A, loop);
+    return getButtonTrigger(XboxButton.A, loop);
   }
 
   /**
@@ -242,7 +239,7 @@ public class CMController extends CommandGenericHID {
    * @see #b(EventLoop)
    */
   public Trigger b() {
-    return getButtonTrigger(Button.B);
+    return getButtonTrigger(XboxButton.B);
   }
 
   /**
@@ -254,7 +251,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger b(EventLoop loop) {
-    return getButtonTrigger(Button.B, loop);
+    return getButtonTrigger(XboxButton.B, loop);
   }
 
   /**
@@ -267,7 +264,7 @@ public class CMController extends CommandGenericHID {
    * @see #x(EventLoop)
    */
   public Trigger x() {
-    return getButtonTrigger(Button.X);
+    return getButtonTrigger(XboxButton.X);
   }
 
   /**
@@ -279,7 +276,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger x(EventLoop loop) {
-    return getButtonTrigger(Button.X, loop);
+    return getButtonTrigger(XboxButton.X, loop);
   }
 
   /**
@@ -292,7 +289,7 @@ public class CMController extends CommandGenericHID {
    * @see #y(EventLoop)
    */
   public Trigger y() {
-    return getButtonTrigger(Button.Y);
+    return getButtonTrigger(XboxButton.Y);
   }
 
   /**
@@ -304,7 +301,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger y(EventLoop loop) {
-    return getButtonTrigger(Button.Y, loop);
+    return getButtonTrigger(XboxButton.Y, loop);
   }
 
   /**
@@ -317,7 +314,7 @@ public class CMController extends CommandGenericHID {
    * @see #leftBumper(EventLoop)
    */
   public Trigger leftBumper() {
-    return getButtonTrigger(Button.LEFT_BUMPER);
+    return getButtonTrigger(XboxButton.LEFT_BUMPER);
   }
 
   /**
@@ -329,7 +326,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger leftBumper(EventLoop loop) {
-    return getButtonTrigger(Button.LEFT_BUMPER, loop);
+    return getButtonTrigger(XboxButton.LEFT_BUMPER, loop);
   }
 
   /**
@@ -343,7 +340,7 @@ public class CMController extends CommandGenericHID {
    * @see #rightBumper(EventLoop)
    */
   public Trigger rightBumper() {
-    return getButtonTrigger(Button.RIGHT_BUMPER);
+    return getButtonTrigger(XboxButton.RIGHT_BUMPER);
   }
 
   /**
@@ -356,7 +353,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger rightBumper(EventLoop loop) {
-    return getButtonTrigger(Button.RIGHT_BUMPER, loop);
+    return getButtonTrigger(XboxButton.RIGHT_BUMPER, loop);
   }
 
   /**
@@ -369,7 +366,7 @@ public class CMController extends CommandGenericHID {
    * @see #back(EventLoop)
    */
   public Trigger back() {
-    return getButtonTrigger(Button.BACK);
+    return getButtonTrigger(XboxButton.BACK);
   }
 
   /**
@@ -381,7 +378,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger back(EventLoop loop) {
-    return getButtonTrigger(Button.BACK, loop);
+    return getButtonTrigger(XboxButton.BACK, loop);
   }
 
   /**
@@ -394,7 +391,7 @@ public class CMController extends CommandGenericHID {
    * @see #start(EventLoop)
    */
   public Trigger start() {
-    return getButtonTrigger(Button.START);
+    return getButtonTrigger(XboxButton.START);
   }
 
   /**
@@ -406,7 +403,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger start(EventLoop loop) {
-    return getButtonTrigger(Button.START, loop);
+    return getButtonTrigger(XboxButton.START, loop);
   }
 
   /**
@@ -419,7 +416,7 @@ public class CMController extends CommandGenericHID {
    * @see #leftStick(EventLoop)
    */
   public Trigger leftStick() {
-    return getButtonTrigger(Button.LEFT_STICK);
+    return getButtonTrigger(XboxButton.LEFT_STICK);
   }
 
   /**
@@ -431,7 +428,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger leftStick(EventLoop loop) {
-    return getButtonTrigger(Button.LEFT_STICK, loop);
+    return getButtonTrigger(XboxButton.LEFT_STICK, loop);
   }
 
   /**
@@ -444,7 +441,7 @@ public class CMController extends CommandGenericHID {
    * @see #rightStick(EventLoop)
    */
   public Trigger rightStick() {
-    return getButtonTrigger(Button.RIGHT_STICK);
+    return getButtonTrigger(XboxButton.RIGHT_STICK);
   }
 
   /**
@@ -456,7 +453,7 @@ public class CMController extends CommandGenericHID {
    *         to the given loop.
    */
   public Trigger rightStick(EventLoop loop) {
-    return getButtonTrigger(Button.RIGHT_STICK, loop);
+    return getButtonTrigger(XboxButton.RIGHT_STICK, loop);
   }
 
   /**
@@ -474,7 +471,7 @@ public class CMController extends CommandGenericHID {
    *         threshold, attached to the given event loop
    */
   public Trigger leftTrigger(double threshold, EventLoop loop) {
-    return getButtonTrigger(Button.LEFT_TRIGGER, threshold, loop);
+    return getButtonTrigger(XboxButton.LEFT_TRIGGER, threshold, loop);
   }
 
   /**
@@ -493,7 +490,7 @@ public class CMController extends CommandGenericHID {
    *         button loop}.
    */
   public Trigger leftTrigger(double threshold) {
-    return getButtonTrigger(Button.LEFT_TRIGGER, threshold);
+    return getButtonTrigger(XboxButton.LEFT_TRIGGER, threshold);
   }
 
   /**
@@ -525,7 +522,7 @@ public class CMController extends CommandGenericHID {
    *         threshold, attached to the given event loop
    */
   public Trigger rightTrigger(double threshold, EventLoop loop) {
-    return getButtonTrigger(Button.RIGHT_TRIGGER, threshold, loop);
+    return getButtonTrigger(XboxButton.RIGHT_TRIGGER, threshold, loop);
   }
 
   /**
@@ -544,7 +541,7 @@ public class CMController extends CommandGenericHID {
    *         button loop}.
    */
   public Trigger rightTrigger(double threshold) {
-    return getButtonTrigger(Button.RIGHT_TRIGGER, threshold);
+    return getButtonTrigger(XboxButton.RIGHT_TRIGGER, threshold);
   }
 
   /**
