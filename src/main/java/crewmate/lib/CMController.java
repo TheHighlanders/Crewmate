@@ -21,7 +21,7 @@ import java.util.HashMap;
 @SuppressWarnings("MethodName")
 public class CMController extends CommandGenericHID {
   private final XboxController m_hid;
-  private final Map<String, Trigger> triggerMap;
+  private final Map<XboxButton, Trigger> triggerMap;
 
   /**
    * Construct an instance of a controller.
@@ -32,41 +32,37 @@ public class CMController extends CommandGenericHID {
   public CMController(int port) {
     super(port);
     m_hid = new XboxController(port);
-    triggerMap = new HashMap<String, Trigger>();
+    triggerMap = new HashMap<XboxButton, Trigger>();
   }
 
   /**
    * Map triggers to specific names
    */
-  public void mapTrigger(String triggerName, Trigger trigger) {
-    triggerMap.put(triggerName, trigger);
+  public void mapTrigger(XboxButton button, Trigger trigger) {
+    triggerMap.put(button, trigger);
   }
 
   /**
    * Map triggers to specific names using a map
    */
-  public void mapTriggers(Map<String, Trigger> triggers) {
+  public void mapTriggers(Map<XboxButton, Trigger> triggers) {
     triggerMap.putAll(triggers);
   }
 
   /**
    * Map triggers to specific names using an array of objects
    */
-  public void mapTriggers(Object[][] mappings) {
-    for (Object[] mapping : mappings) {
-      if (mapping.length == 2 && mapping[0] instanceof String && mapping[1] instanceof Trigger) {
-        String triggerName = (String) mapping[0];
-        Trigger trigger = (Trigger) mapping[1];
-        triggerMap.put(triggerName, trigger);
-      }
+  public void mapTriggers(TM[] mappings) {
+    for (TM mapping : mappings) {
+        triggerMap.put(mapping.getButton(), mapping.getTrigger());
     }
-  }
+}
 
   /**
    * Getter for the mapped triggers
    */
-  public Trigger getTrigger(String triggerName) {
-    return triggerMap.get(triggerName);
+  public Trigger getTrigger(XboxButton button) {
+    return triggerMap.get(button);
   }
 
   /**
@@ -76,8 +72,8 @@ public class CMController extends CommandGenericHID {
    * @param command     The command to bind.
    * @param triggerType The type of trigger binding to use.
    */
-  public void bind(String triggerName, Command command, TriggerType triggerType) {
-    Trigger trigger = getTrigger(triggerName);
+  public void bind(XboxButton button, Command command, TriggerType triggerType) {
+    Trigger trigger = getTrigger(button);
     if (trigger != null) {
       switch (triggerType) {
         case ON_TRUE:
@@ -100,7 +96,7 @@ public class CMController extends CommandGenericHID {
           break;
       }
     } else {
-      System.out.println("Warning: Trigger '" + triggerName + "' not found.");
+      System.out.println("Warning: Trigger '" + button  + "' not found.");
     }
   }
 
@@ -110,8 +106,8 @@ public class CMController extends CommandGenericHID {
    * @param triggerName The name of the trigger to bind to.
    * @param command     The command to bind.
    */
-  public void bind(String triggerName, Command command) {
-    bind(triggerName, command, TriggerType.ON_TRUE);
+  public void bind(XboxButton button, Command command) {
+    bind(button, command, TriggerType.ON_TRUE);
   }
 
   /**
@@ -130,7 +126,7 @@ public class CMController extends CommandGenericHID {
    *
    * @return the trigger map
    */
-  public Map<String, Trigger> getTriggerMap() {
+  public Map<XboxButton, Trigger> getTriggerMap() {
     return triggerMap;
   }
 

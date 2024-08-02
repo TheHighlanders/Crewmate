@@ -119,6 +119,14 @@ task generateHtmlFromJava {
     }
 }
 
+sourceSets {
+    annotationProcessor {
+        java {
+            srcDir 'src/main/java/crewmate/lib/annotations'
+        }
+    }
+}
+
 javadoc {
     destinationDir = file('docs/')
 }
