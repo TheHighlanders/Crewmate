@@ -23,17 +23,6 @@ public class CMController extends CommandGenericHID {
   private final XboxController m_hid;
   private final Map<String, Trigger> triggerMap;
 
-  public static enum TriggerType {
-    ON_TRUE,
-    ON_FALSE,
-    WHILE_TRUE,
-    WHILE_FALSE,
-    TOGGLE_ON_TRUE,
-    TOGGLE_ON_FALSE
-  }
-
-  
-
   /**
    * Construct an instance of a controller.
    *
