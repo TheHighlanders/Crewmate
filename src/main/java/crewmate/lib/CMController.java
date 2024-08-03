@@ -54,9 +54,9 @@ public class CMController extends CommandGenericHID {
    */
   public void mapTriggers(TM[] mappings) {
     for (TM mapping : mappings) {
-        triggerMap.put(mapping.getButton(), mapping.getTrigger());
+      triggerMap.put(mapping.getButton(), mapping.getTrigger());
     }
-}
+  }
 
   /**
    * Getter for the mapped triggers
@@ -68,7 +68,7 @@ public class CMController extends CommandGenericHID {
   /**
    * Binds a command to a named trigger with a specified trigger type.
    * 
-   * @param triggerName The name of the trigger to bind to.
+   * @param button      The name of the trigger to bind to.
    * @param command     The command to bind.
    * @param triggerType The type of trigger binding to use.
    */
@@ -96,15 +96,15 @@ public class CMController extends CommandGenericHID {
           break;
       }
     } else {
-      System.out.println("Warning: Trigger '" + button  + "' not found.");
+      System.out.println("Warning: Trigger '" + button + "' not found.");
     }
   }
 
   /**
    * Binds a command to a named trigger with ON_TRUE as the default trigger type.
    * 
-   * @param triggerName The name of the trigger to bind to.
-   * @param command     The command to bind.
+   * @param button  The name of the trigger to bind to.
+   * @param command The command to bind.
    */
   public void bind(XboxButton button, Command command) {
     bind(button, command, TriggerType.ON_TRUE);
@@ -119,7 +119,6 @@ public class CMController extends CommandGenericHID {
   public XboxController getHID() {
     return m_hid;
   }
-
 
   /**
    * Get the trigger map
