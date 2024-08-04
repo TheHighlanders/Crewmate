@@ -10,7 +10,13 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.HashMap;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A version of {@link XboxController} with {@link Trigger} factories for
@@ -50,11 +56,27 @@ public class CMController extends CommandGenericHID {
   }
 
   /**
-   * Map triggers to specific names using an array of objects
+   * Map triggers to specific names using a trigger map
    */
-  public void mapTriggers(TM[] mappings) {
-    for (TM mapping : mappings) {
-      triggerMap.put(mapping.getButton(), mapping.getTrigger());
+  public void mapTriggers(TM mappings) {
+    for (Map.Entry<XboxButton, String> entry : mappings.getMappings().entrySet()) {
+      XboxButton button = entry.getKey();
+      String triggerName = entry.getValue();
+
+      DynamicTriggerAccess dynamicTrigger = (DynamicTriggerAccess) Proxy.newProxyInstance(
+          DynamicTriggerAccess.class.getClassLoader(),
+          new Class<?>[] { DynamicTriggerAccess.class },
+          new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+              if (method.getName().equals(triggerName)) {
+                return getButtonTrigger(button);
+              }
+              throw new IllegalArgumentException("Method not found: " + method.getName());
+            }
+          });
+      dynamicTrigger.setName(triggerName);
+      triggerMap.put(button, dynamicTrigger);
     }
   }
 
@@ -599,4 +621,32 @@ public class CMController extends CommandGenericHID {
   public double getRightTriggerAxis() {
     return m_hid.getRightTriggerAxis();
   }
+
+  // public void generateControllerImage(String outputPath) {
+  // List<String> command = new ArrayList<>();
+  // command.add("python");
+  // command.add("DrawController.py");
+  // command.add(outputPath);
+
+  // for (Map.Entry<XboxButton, Trigger> entry : triggerMap.entrySet()) {
+  // String buttonName = entry.getKey().toString();
+  // String triggerName = entry.getValue()
+  // command.add("--custom_labels");
+  // command.add(buttonName + "=" + triggerName);
+  // }
+
+  // ProcessBuilder processBuilder = new ProcessBuilder(command);
+  // try {
+  // Process process = processBuilder.start();
+  // int exitCode = process.waitFor();
+  // if (exitCode == 0) {
+  // System.out.println("Controller image generated successfully.");
+  // } else {
+  // System.err.println("Error generating controller image. Exit code: " +
+  // exitCode);
+  // }
+  // } catch (IOException | InterruptedException e) {
+  // e.printStackTrace();
+  // }
+  // }
 }

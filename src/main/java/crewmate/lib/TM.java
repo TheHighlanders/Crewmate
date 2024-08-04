@@ -1,21 +1,21 @@
 package crewmate.lib;
 
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+import java.util.Map;
+import java.util.HashMap;
 
 public class TM {
-    private final XboxButton button;
-    private final Trigger trigger;
+    private Map<XboxButton, String> mappings;
 
-    public TM(XboxButton button, Trigger trigger) {
-        this.button = button;
-        this.trigger = trigger;
+    public TM(Object[][] mappingArray) {
+        this.mappings = new HashMap<>();
+        for (Object[] mapping : mappingArray) {
+            XboxButton button = XboxButton.valueOf((String) mapping[0]);
+            String triggerName = (String) mapping[1];
+            mappings.put(button, triggerName);
+        }
     }
 
-    public XboxButton getButton() {
-        return button;
-    }
-
-    public Trigger getTrigger() {
-        return trigger;
+    public Map<XboxButton, String> getMappings() {
+        return mappings;
     }
 }
