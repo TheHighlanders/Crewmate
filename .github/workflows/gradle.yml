@@ -28,12 +28,6 @@ jobs:
   #   needs: spotless-check
   #   uses: ./.github/workflows/version-increment.yml
 
-  push-git:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - run: git push
-
   dependency-submission:
     runs-on: ubuntu-latest
     permissions:
