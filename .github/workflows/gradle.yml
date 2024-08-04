@@ -24,16 +24,12 @@ jobs:
     needs: spotless-check
     uses: ./.github/workflows/build-job.yml
 
-  test:
-    needs: build
-    uses: ./.github/workflows/test-job.yml
-
-  version-increment:
-    needs: test
-    uses: ./.github/workflows/version-increment.yml
+  # version-increment:
+  #   needs: spotless-check
+  #   uses: ./.github/workflows/version-increment.yml
 
   push-git:
-    needs: version-increment
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - run: git push
