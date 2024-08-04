@@ -27,7 +27,7 @@ import java.util.List;
 @SuppressWarnings("MethodName")
 public class CMController extends CommandGenericHID {
   private final XboxController m_hid;
-  private final Map<XboxButton, Trigger> triggerMap;
+  private final Map<XboxButton, DynamicTriggerAccess> triggerMap;
 
   /**
    * Construct an instance of a controller.
@@ -38,20 +38,20 @@ public class CMController extends CommandGenericHID {
   public CMController(int port) {
     super(port);
     m_hid = new XboxController(port);
-    triggerMap = new HashMap<XboxButton, Trigger>();
+    triggerMap = new HashMap<XboxButton, DynamicTriggerAccess>();
   }
 
   /**
    * Map triggers to specific names
    */
-  public void mapTrigger(XboxButton button, Trigger trigger) {
+  public void mapTrigger(XboxButton button, DynamicTriggerAccess trigger) {
     triggerMap.put(button, trigger);
   }
 
   /**
    * Map triggers to specific names using a map
    */
-  public void mapTriggers(Map<XboxButton, Trigger> triggers) {
+  public void mapTriggers(Map<XboxButton, DynamicTriggerAccess> triggers) {
     triggerMap.putAll(triggers);
   }
 
@@ -147,7 +147,7 @@ public class CMController extends CommandGenericHID {
    *
    * @return the trigger map
    */
-  public Map<XboxButton, Trigger> getTriggerMap() {
+  public Map<XboxButton, DynamicTriggerAccess> getTriggerMap() {
     return triggerMap;
   }
 
@@ -622,31 +622,31 @@ public class CMController extends CommandGenericHID {
     return m_hid.getRightTriggerAxis();
   }
 
-  // public void generateControllerImage(String outputPath) {
-  // List<String> command = new ArrayList<>();
-  // command.add("python");
-  // command.add("DrawController.py");
-  // command.add(outputPath);
+  public void generateControllerImage(String outputPath) {
+    List<String> command = new ArrayList<>();
+    command.add("python");
+    command.add("DrawController.py");
+    command.add(outputPath);
 
-  // for (Map.Entry<XboxButton, Trigger> entry : triggerMap.entrySet()) {
-  // String buttonName = entry.getKey().toString();
-  // String triggerName = entry.getValue()
-  // command.add("--custom_labels");
-  // command.add(buttonName + "=" + triggerName);
-  // }
+    for (Map.Entry<XboxButton, DynamicTriggerAccess> entry : triggerMap.entrySet()) {
+      String buttonName = entry.getKey().toString();
+      String triggerName = entry.getValue().getName();
+      command.add("--custom_labels");
+      command.add(buttonName + "=" + triggerName);
+    }
 
-  // ProcessBuilder processBuilder = new ProcessBuilder(command);
-  // try {
-  // Process process = processBuilder.start();
-  // int exitCode = process.waitFor();
-  // if (exitCode == 0) {
-  // System.out.println("Controller image generated successfully.");
-  // } else {
-  // System.err.println("Error generating controller image. Exit code: " +
-  // exitCode);
-  // }
-  // } catch (IOException | InterruptedException e) {
-  // e.printStackTrace();
-  // }
-  // }
+    ProcessBuilder processBuilder = new ProcessBuilder(command);
+    try {
+      Process process = processBuilder.start();
+      int exitCode = process.waitFor();
+      if (exitCode == 0) {
+        System.out.println("Controller image generated successfully.");
+      } else {
+        System.err.println("Error generating controller image. Exit code: " +
+            exitCode);
+      }
+    } catch (IOException | InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
 }
