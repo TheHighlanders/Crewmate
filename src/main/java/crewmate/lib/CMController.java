@@ -28,6 +28,7 @@ import java.util.List;
 public class CMController extends CommandGenericHID {
   private final XboxController m_hid;
   private final Map<XboxButton, DynamicTriggerAccess> triggerMap;
+  private boolean dynamicTriggerAccess;
 
   /**
    * Construct an instance of a controller.
@@ -39,6 +40,11 @@ public class CMController extends CommandGenericHID {
     super(port);
     m_hid = new XboxController(port);
     triggerMap = new HashMap<XboxButton, DynamicTriggerAccess>();
+    dynamicTriggerAccess = false;
+  }
+
+  public void getDynamicTriggerAccess() {
+    dynamicTriggerAccess = true;
   }
 
   /**
@@ -62,19 +68,24 @@ public class CMController extends CommandGenericHID {
     for (Map.Entry<XboxButton, String> entry : mappings.getMappings().entrySet()) {
       XboxButton button = entry.getKey();
       String triggerName = entry.getValue();
-
-      DynamicTriggerAccess dynamicTrigger = (DynamicTriggerAccess) Proxy.newProxyInstance(
-          DynamicTriggerAccess.class.getClassLoader(),
-          new Class<?>[] { DynamicTriggerAccess.class },
-          new InvocationHandler() {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-              if (method.getName().equals(triggerName)) {
-                return getButtonTrigger(button);
+      DynamicTriggerAccess dynamicTrigger;
+      if (dynamicTriggerAccess) {
+        dynamicTrigger = (DynamicTriggerAccess) Proxy.newProxyInstance(
+            DynamicTriggerAccess.class.getClassLoader(),
+            new Class<?>[] { DynamicTriggerAccess.class },
+            new InvocationHandler() {
+              @Override
+              public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                if (method.getName().equals(triggerName)) {
+                  return getButtonTrigger(button);
+                }
+                throw new IllegalArgumentException("Method not found: " + method.getName());
               }
-              throw new IllegalArgumentException("Method not found: " + method.getName());
-            }
-          });
+            });
+      } else {
+        dynamicTrigger = new DynamicTriggerAccess(null);
+      }
+
       dynamicTrigger.setName(triggerName);
       triggerMap.put(button, dynamicTrigger);
     }
@@ -85,51 +96,6 @@ public class CMController extends CommandGenericHID {
    */
   public Trigger getTrigger(XboxButton button) {
     return triggerMap.get(button);
-  }
-
-  /**
-   * Binds a command to a named trigger with a specified trigger type.
-   * 
-   * @param button      The name of the trigger to bind to.
-   * @param command     The command to bind.
-   * @param triggerType The type of trigger binding to use.
-   */
-  public void bind(XboxButton button, Command command, TriggerType triggerType) {
-    Trigger trigger = getTrigger(button);
-    if (trigger != null) {
-      switch (triggerType) {
-        case ON_TRUE:
-          trigger.onTrue(command);
-          break;
-        case ON_FALSE:
-          trigger.onFalse(command);
-          break;
-        case WHILE_TRUE:
-          trigger.whileTrue(command);
-          break;
-        case WHILE_FALSE:
-          trigger.whileFalse(command);
-          break;
-        case TOGGLE_ON_TRUE:
-          trigger.toggleOnTrue(command);
-          break;
-        case TOGGLE_ON_FALSE:
-          trigger.toggleOnFalse(command);
-          break;
-      }
-    } else {
-      System.out.println("Warning: Trigger '" + button + "' not found.");
-    }
-  }
-
-  /**
-   * Binds a command to a named trigger with ON_TRUE as the default trigger type.
-   * 
-   * @param button  The name of the trigger to bind to.
-   * @param command The command to bind.
-   */
-  public void bind(XboxButton button, Command command) {
-    bind(button, command, TriggerType.ON_TRUE);
   }
 
   /**

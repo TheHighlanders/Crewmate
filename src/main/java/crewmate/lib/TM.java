@@ -9,7 +9,19 @@ public class TM {
     public TM(Object[][] mappingArray) {
         this.mappings = new HashMap<>();
         for (Object[] mapping : mappingArray) {
-            XboxButton button = XboxButton.valueOf((String) mapping[0]);
+            XboxButton button;
+            if (mapping.length != 2) {
+                throw new IllegalArgumentException("Each mapping should have exactly two elements.");
+            }
+            if (mapping[0] instanceof String) {
+                button = XboxButton.valueOf((String) mapping[0]);
+            } else if (mapping[0] instanceof XboxButton) {
+                button = (XboxButton) mapping[0];
+            }
+            else {
+                throw new IllegalArgumentException("First element of each mapping should be a String or XboxButton.");
+            }
+
             String triggerName = (String) mapping[1];
             mappings.put(button, triggerName);
         }
