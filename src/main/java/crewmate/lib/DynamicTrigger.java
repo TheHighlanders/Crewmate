@@ -8,6 +8,7 @@ import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class DynamicTrigger implements BooleanSupplier {
     private final BooleanSupplier m_condition;
@@ -414,5 +415,15 @@ public class DynamicTrigger implements BooleanSupplier {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Casts this DynamicTrigger to a WPILib Trigger, the new trigger will not have
+     * a identifier.
+     *
+     * @return A Trigger representing this DynamicTrigger.
+     */
+    public Trigger castToWPILibTrigger() {
+        return new Trigger(this.m_loop, this.m_condition);
     }
 }

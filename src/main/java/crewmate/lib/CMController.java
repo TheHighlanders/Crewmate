@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 import java.util.Map;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -608,6 +609,10 @@ public class CMController extends CommandGenericHID {
     return m_hid.getLeftTriggerAxis();
   }
 
+  public double getLeftTriggerAxis(double deadband) {
+    return MathUtil.applyDeadband(m_hid.getLeftTriggerAxis(), deadband);
+  }
+
   /**
    * Get the right trigger axis value of the controller. Note that this axis is
    * bound to the
@@ -617,6 +622,10 @@ public class CMController extends CommandGenericHID {
    */
   public double getRightTriggerAxis() {
     return m_hid.getRightTriggerAxis();
+  }
+
+  public double getRightTriggerAxis(double deadband) {
+    return MathUtil.applyDeadband(m_hid.getRightTriggerAxis(), deadband);
   }
 
   // public void generateControllerImage(String outputPath) {
