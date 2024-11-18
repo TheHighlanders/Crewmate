@@ -2,6 +2,10 @@ package crewmate.lib.statemachines.structures;
 
 import java.util.function.BooleanSupplier;
 
+/**
+ * A class representing a Transition between two states of a StateMachine, allows a force and block
+ * condition to be applied
+ */
 public class Transition {
   private State start;
   private State end;
@@ -9,11 +13,23 @@ public class Transition {
   private BooleanSupplier force;
   private BooleanSupplier blocker;
 
+  /** Statuses of a Transition */
   public enum TransitionStatus {
+    /** FORCED = Transition was forced due to force condition */
     FORCED,
+    /**
+     * AVAILABLE = Transition is able to be made, due to current state matching start, and not being
+     * blocked
+     */
     AVAILABLE,
+    /** UNAVAILABLE = Transition is not able to be made, current state does not match start */
     UNAVAILABLE,
+    /** BLOCKED = Transition start state matches current state, but is blocked */
     BLOCKED,
+    /**
+     * SUCCEEDED = Transition start state matches current, and non-blocked, and transition was
+     * attempted, transition should occur at the machine level
+     */
     SUCCEEDED
   }
 
@@ -124,6 +140,7 @@ public class Transition {
   /**
    * Checks if a Transition is usable
    *
+   * @param current state of the machine
    * @return TransitionStatus.BLOCKED if unusable, TransitionStatus.SUCCEEDED if able,
    *     TransitionStatus.UNAVAILABLE if incorrect start State
    */
@@ -139,27 +156,62 @@ public class Transition {
     }
   }
 
+  /**
+   * Starting state for this Transition
+   *
+   * @return Starting State
+   */
   public State getStart() {
     return start;
   }
 
+  /**
+   * Ending state for this Transition
+   *
+   * @return Ending State
+   */
   public State getEnd() {
     return end;
   }
 
+  /**
+   * Supplier for the Blocker condition for this Transition
+   *
+   * @return Blocker Supplier
+   */
   public BooleanSupplier getBlocker() {
     return blocker;
   }
 
+  /**
+   * Supplier for the Force condition for this Transition
+   *
+   * @return Force Supplier
+   */
   public BooleanSupplier getForce() {
     return force;
   }
 
+  /**
+   * Compares two Transition objects,
+   *
+   * @param other Transition to compare against
+   * @return true if they are equal, false otherwise
+   */
   public boolean equals(Transition other) {
-    return this.getStart().equals(other.getStart()) && this.getEnd().equals(other.getEnd());
+    boolean startEndMatch =
+        this.getStart().equals(other.getStart()) && this.getEnd().equals(other.getEnd());
+    boolean forceBlockerMatch =
+        this.getBlocker().equals(other.getBlocker()) && this.getForce().equals(other.getForce());
+    return startEndMatch && forceBlockerMatch;
     // TODO: Add differentiation by blocker and force
   }
 
+  /**
+   * Creates a string in the format startStateName -> endStateName
+   *
+   * @return String representing the Transition
+   */
   public String toString() {
     return this.getStart().getName() + " -> " + this.getEnd().getName();
   }

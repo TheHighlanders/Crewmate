@@ -85,6 +85,10 @@ replay_pid*
 # Icon must end with two \r
 Icon
 
+#gradle
+.gradle
+**/build/
+!src/**/build/
 
 # Thumbnails
 ._*
@@ -182,5 +186,4 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/c++,java,linux,macos,gradle,windows,visualstudiocode
-
 **/docs

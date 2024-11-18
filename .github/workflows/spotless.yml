@@ -7,6 +7,10 @@ on:
     paths-ignore:
       - ".*" # Exclude all directories starting with a "."
 jobs:
+  make-repo-safe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: git config --global --add safe.directory $(realpath .)
   spotless-check:
     uses: ./.github/workflows/spotless-check.yml
   push:
