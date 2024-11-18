@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class CMController extends CommandGenericHID {
   private final XboxController m_hid;
   private final Map<XboxButton, DynamicTrigger> triggerMap;
-
+  
   /**
    * Construct an instance of a controller.
    *
@@ -53,11 +53,11 @@ public class CMController extends CommandGenericHID {
    */
   public void mapTriggers(TM mappings) {
     mappings.getMappings().forEach((button, triggerName) -> {
-        DynamicTrigger dynamicTrigger = getButtonTrigger(button);
-        dynamicTrigger.setName(triggerName);
-        triggerMap.put(button, dynamicTrigger);
+      DynamicTrigger dynamicTrigger = getButtonTrigger(button);
+      dynamicTrigger.setName(triggerName);
+      triggerMap.put(button, dynamicTrigger);
     });
-}
+  }
 
   /**
    * Get a trigger associated with a specific Xbox button.
@@ -84,7 +84,8 @@ public class CMController extends CommandGenericHID {
         .filter(trigger -> triggerName.equals(trigger.getName()))
         .findFirst()
         .orElse(null);
-}
+  }
+
   /**
    * Get the underlying GenericHID object.
    *

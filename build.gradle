@@ -27,7 +27,7 @@ if (project.hasProperty('releaseMode')) {
 apply from: 'config.gradle'
 
 dependencies {
-    def wpiVersion = '2024.+'
+    def wpiVersion = '2025.+'
     implementation "edu.wpi.first.cscore:cscore-java:$wpiVersion"
     implementation "edu.wpi.first.cameraserver:cameraserver-java:$wpiVersion"
     implementation "edu.wpi.first.ntcore:ntcore-java:$wpiVersion"
@@ -41,7 +41,7 @@ dependencies {
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.18.1"
     implementation "com.fasterxml.jackson.core:jackson-core:2.18.1"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.17.2"
-    implementation 'edu.wpi.first.thirdparty.frc2024.opencv:opencv-java:4.8.0-2'
+    implementation 'edu.wpi.first.thirdparty.frc2024.opencv:opencv-java:4.8.0-4'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
@@ -50,7 +50,7 @@ dependencies {
 apply from: 'publish.gradle'
 
 wrapper {
-    gradleVersion '8.4'
+    gradleVersion '8.10.2'
 }
 
 spotless {
