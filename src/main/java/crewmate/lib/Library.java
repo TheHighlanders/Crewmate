@@ -1,10 +1,13 @@
 package crewmate.lib;
 
+/** Main file, contains general library overview methods */
 public class Library {
-      public
-       static 
-       boolean 
-       connected() {
-         return true;
+  /**
+   * Reports status of library
+   *
+   * @return True if library is connected, used to determine if added to project correctly
+   */
+  public static boolean connected() {
+    return true;
   }
 }

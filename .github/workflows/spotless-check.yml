@@ -17,9 +17,3 @@ jobs:
         id: spotless
         run: |
           ./gradlew spotlessCheck
-
-      - name: Spotless Apply
-        if: ${{ failure() }}
-        run: |
-          ./gradlew spotlessApply
-          echo "Spotless check failed. Applied formatting changes."
