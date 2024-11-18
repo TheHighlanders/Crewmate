@@ -2,14 +2,13 @@ package crewmate.lib.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.geometry.Twist2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import org.junit.jupiter.api.Test;
 
 class GeomUtilTest {
 
@@ -72,7 +71,7 @@ class GeomUtilTest {
   void multiply_Twist_ReturnsMultipliedTwist() {
     Twist2d twist = new Twist2d(1.0, 2.0, Math.PI);
     Twist2d multipliedTwist = GeomUtil.multiply(twist, 2.0);
-    assertEquals(new Twist2d(2.0, 4.0, 2*Math.PI), multipliedTwist);
+    assertEquals(new Twist2d(2.0, 4.0, 2 * Math.PI), multipliedTwist);
   }
 
   @Test
@@ -93,7 +92,7 @@ class GeomUtilTest {
   @Test
   void withRotation_Pose_ReturnsUpdatedPose() {
     Pose2d pose = new Pose2d(1.0, 2.0, new Rotation2d(Math.PI));
-    Rotation2d newRotation = new Rotation2d(Math.PI/2);
+    Rotation2d newRotation = new Rotation2d(Math.PI / 2);
     Pose2d newPose = GeomUtil.withRotation(pose, newRotation);
     assertEquals(new Pose2d(pose.getTranslation(), newRotation), newPose);
   }
