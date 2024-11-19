@@ -1,10 +1,9 @@
 package crewmate.lib.util;
 
+import crewmate.lib.Library.Constants;
 import crewmate.lib.motor.CrewmateMotor;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
 import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
-import crewmate.lib.Library.Constants;
 
 public class LoggedTunablePID {
   private static final String tableKey = "TunablePID";
@@ -29,7 +28,8 @@ public class LoggedTunablePID {
     this.key = tableKey + "/" + dashboardKey;
   }
 
-  public LoggedTunablePID(CrewmateMotor motor, String dashboardKey, double defaultP, double defaultI, double defaultD) {
+  public LoggedTunablePID(
+      CrewmateMotor motor, String dashboardKey, double defaultP, double defaultI, double defaultD) {
     this(motor, dashboardKey);
     initDefault(defaultP, defaultI, defaultD);
   }
@@ -58,8 +58,7 @@ public class LoggedTunablePID {
   }
 
   public boolean UpdateIfChanged() {
-    if (!hasDefault)
-      return false;
+    if (!hasDefault) return false;
 
     if (Constants.tuningMode) {
       double currentP = kP.get();
@@ -78,8 +77,7 @@ public class LoggedTunablePID {
   }
 
   public void updatePID() {
-    if (!hasDefault)
-      return;
+    if (!hasDefault) return;
 
     if (Constants.tuningMode) {
       motor.setP(kP.get());
@@ -93,10 +91,11 @@ public class LoggedTunablePID {
   }
 
   public void bindToScheduler() {
-    CommandScheduler.getInstance().onCommandExecute(
-        (command) -> {
-          this.UpdateIfChanged();
-        });
+    CommandScheduler.getInstance()
+        .onCommandExecute(
+            (command) -> {
+              this.UpdateIfChanged();
+            });
   }
 
   public CrewmateMotor getMotor() {
