@@ -8,23 +8,19 @@ public class CommandBoolean extends SubsystemBase {
   Runnable onTrue;
   Runnable onFalse;
 
-  public CommandBoolean(Runnable onTrue, Runnable onFalse) {
+  public CommandBoolean(Runnable onTrue, Runnable onFalse, boolean initState) {
     this.onTrue = onTrue;
     this.onFalse = onFalse;
+    trigger = initState;
   }
 
-  public CommandBoolean(Runnable onEither) {
-    this.onFalse = this.onTrue = onEither;
-  }
-
-  public void periodic(boolean update) {
-    if (update != trigger) {
-      if (update) {
+  public void periodic() {
+    
+      if (trigger) {
         onTrue.run();
       } else {
         onFalse.run();
       }
-      trigger = update;
-    }
+      trigger = !trigger;
   }
 }
