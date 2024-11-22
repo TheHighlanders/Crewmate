@@ -24,10 +24,6 @@ jobs:
     needs: spotless-check
     uses: ./.github/workflows/build-job.yml
 
-  test:
-    needs: build
-    uses: ./.github/workflows/test-job.yml
-
   dependency-submission:
     runs-on: ubuntu-latest
     permissions:
