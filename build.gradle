@@ -11,6 +11,8 @@ plugins {
 }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_1
     toolchain {
         implementation = JvmImplementation.J9
     }
