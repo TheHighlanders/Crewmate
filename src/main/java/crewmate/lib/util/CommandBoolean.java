@@ -15,6 +15,7 @@ public class CommandBoolean extends SubsystemBase {
   }
 
   public void periodic() {
+
     if (trigger) {
       onTrue.run();
     } else {

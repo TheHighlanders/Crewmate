@@ -3,7 +3,7 @@ plugins {
     id 'java-library'
     id 'google-test'
     id 'edu.wpi.first.wpilib.repositories.WPILibRepositoriesPlugin' version '2020.2'
-    id 'edu.wpi.first.NativeUtils' version '2024.7.2'
+    id 'edu.wpi.first.NativeUtils' version '2025.3.0'
     id 'edu.wpi.first.GradleJni' version '1.1.0'
     id "edu.wpi.first.GradleRIO" version "2024.3.2"
     id 'edu.wpi.first.GradleVsCode' version '2.1.0'
@@ -37,7 +37,7 @@ apply from: 'config.gradle'
 
 // Apply Java configuration
 dependencies {
-    def wpiVersion = "2024.+"
+    def wpiVersion = "2025.+"
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
 
