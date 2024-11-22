@@ -10,4 +10,13 @@ public class Library {
   public static boolean connected() {
     return true;
   }
+
+  /** Sets tuning mode */
+  public static void tuningMode(boolean newTuningMode) {
+    Constants.tuningMode = newTuningMode;
+  }
+
+  public class Constants {
+    public static boolean tuningMode = false;
+  }
 }
