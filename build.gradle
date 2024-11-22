@@ -10,6 +10,12 @@ plugins {
     id 'com.diffplug.spotless' version '6.20.0'
 }
 
+java {
+    toolchain {
+        implementation = JvmImplementation.J9
+    }
+}
+
 repositories {
     maven {
         url = uri("https://maven.pkg.github.com/Mechanical-Advantage/AdvantageKit")
