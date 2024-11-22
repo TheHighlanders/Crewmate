@@ -1,0 +1,89 @@
+name: Publish
+
+on:
+  push:
+  release:
+    types: [published]
+
+jobs:
+  build-docker:
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - container: wpilib/roborio-cross-ubuntu:2024-22.04
+            artifact-name: Athena
+            build-options: "-Ponlylinuxathena"
+          - container: wpilib/raspbian-cross-ubuntu:bullseye-22.04
+            artifact-name: Arm32
+            build-options: "-Ponlylinuxarm32"
+          - container: wpilib/aarch64-cross-ubuntu:bullseye-22.04
+            artifact-name: Arm64
+            build-options: "-Ponlylinuxarm64"
+          - container: wpilib/ubuntu-base:22.04
+            artifact-name: Linux
+            build-options: ""
+    name: "Build - ${{ matrix.artifact-name }}"
+    runs-on: ubuntu-latest
+    container: ${{ matrix.container }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+      - name: Build with Gradle
+        run: ./gradlew build ${{ matrix.build-options }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: build/allOutputs
+
+  build-host:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2022
+            artifact-name: Win64
+            architecture: x64
+          - os: macos-14
+            artifact-name: macOS
+            architecture: x64
+    name: "Build - ${{ matrix.artifact-name }}"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          architecture: ${{ matrix.architecture }}
+      - name: Build with Gradle
+        run: ./gradlew build -Pbuildalldesktop
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact-name }}
+          path: build/allOutputs
+
+  publish:
+    needs: [build-docker, build-host]
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get version
+        id: get_version
+        uses: battila7/get-version-action@v2
+      - name: Get release info
+        id: get_release_info
+        uses: bruceadams/get-release@v1.2.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+      - name: Publish Release
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.get_version.outputs.version-without-v }}
