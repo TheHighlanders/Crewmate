@@ -7,26 +7,47 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import crewmate.lib.motor.MotorConfig.ControlType;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CrewmateSparkMax implements CrewmateMotor {
-  private CANSparkMax controller;
-  private RelativeEncoder encoder;
-  // TODO: Add Alternate and Absolute Encoder support
-  private SparkPIDController pid;
-  private double setpoint;
+  private final CANSparkMax controller;
+  private final RelativeEncoder encoder;
+  private final SparkPIDController pid;
+  private final AtomicReference<Double> setpoint; // Thread-safe reference to the setpoint
+
+  private volatile double lastPosition = 0.0;
+  private volatile double lastVelocity = 0.0;
+  private static final int DEFAULT_CAN_TIMEOUT_MS = 250;
+  private static final double DEFAULT_VOLTAGE_COMPENSATION = 12.0;
+  private static final int DEFAULT_CURRENT_LIMIT = 30;
+  private static final double DEFAULT_RAMP_RATE = 0.2;
+  private static final int DEFAULT_ENCODER_AVERAGE_DEPTH = 2;
 
   public CrewmateSparkMax(MotorConfig config) {
-    controller =
-        new CANSparkMax(
-            config.canID,
-            switch (config.motorType) {
-              case BRUSHLESS -> MotorType.kBrushless;
-              case BRUSHED -> MotorType.kBrushed;
-            });
+    controller = new CANSparkMax(
+        config.canID,
+        config.motorType == MotorConfig.Type.BRUSHLESS ? MotorType.kBrushless : MotorType.kBrushed);
 
     encoder = controller.getEncoder();
     pid = controller.getPIDController();
+    setpoint = new AtomicReference<>(0.0);
 
+    initializeController(config);
+    configureController();
+    applyOptimizedSettings();
+  }
+  //TODO: why not make motorType a bool to prevent unnnecessary imports
+  public CrewmateSparkMax(int canID, MotorType motorType) {
+    this(
+        MotorConfig.motorBasic(
+            canID,
+            motorType == MotorType.kBrushless
+                ? MotorConfig.Type.BRUSHLESS
+                : MotorConfig.Type.BRUSHED));
+  }
+
+  private void initializeController(MotorConfig config) {
+    controller.restoreFactoryDefaults();
     config.p.ifPresent(this::setP);
     config.i.ifPresent(this::setI);
     config.d.ifPresent(this::setD);
@@ -35,30 +56,27 @@ public class CrewmateSparkMax implements CrewmateMotor {
     config.positionConversionFactor.ifPresent(encoder::setPositionConversionFactor);
     config.velocityConversionFactor.ifPresent(encoder::setVelocityConversionFactor);
     setBrakeMode(config.brakeMode.orElse(false));
+  }
 
-    setpoint = 0;
+  private void configureController() {
+    controller.setCANTimeout(DEFAULT_CAN_TIMEOUT_MS);
+    controller.enableVoltageCompensation(DEFAULT_VOLTAGE_COMPENSATION);
+    controller.setSmartCurrentLimit(DEFAULT_CURRENT_LIMIT);
+    controller.setOpenLoopRampRate(DEFAULT_RAMP_RATE);
+    controller.setClosedLoopRampRate(DEFAULT_RAMP_RATE);
+  }
 
-    controller.restoreFactoryDefaults();
-    controller.setCANTimeout(
-        250); // These could be a config options but decided they would never get used
-    controller.enableVoltageCompensation(12);
-    controller.setSmartCurrentLimit(30);
-    // controller.setSecondaryCurrentLimit(40);
-    controller.setOpenLoopRampRate(0.2);
-    controller.setClosedLoopRampRate(0.2);
-    encoder.setPosition(setpoint);
-    encoder.setAverageDepth(2);
+  private void applyOptimizedSettings() {
+    encoder.setPosition(setpoint.get());
+    encoder.setAverageDepth(DEFAULT_ENCODER_AVERAGE_DEPTH);
     controller.setCANTimeout(0);
     controller.burnFlash();
   }
 
-  public CrewmateSparkMax(int canID, MotorType motorType) {
-    this(
-        MotorConfig.motorBasic(
-            canID,
-            motorType == MotorType.kBrushless
-                ? MotorConfig.Type.BRUSHLESS
-                : MotorConfig.Type.BRUSHED));
+  public void setPID(double p, double i, double d) {
+    pid.setP(p);
+    pid.setI(i);
+    pid.setD(d);
   }
 
   @Override
@@ -73,12 +91,14 @@ public class CrewmateSparkMax implements CrewmateMotor {
 
   @Override
   public double getPosition() {
-    return encoder.getPosition();
+    lastPosition = encoder.getPosition();
+    return lastPosition;
   }
 
   @Override
   public double getVelocity() {
-    return encoder.getVelocity();
+    lastVelocity = encoder.getVelocity();
+    return lastVelocity;
   }
 
   @Override
@@ -148,26 +168,19 @@ public class CrewmateSparkMax implements CrewmateMotor {
 
   @Override
   public void setSetpoint(double setpoint, ControlType controlType) {
-    this.setpoint = setpoint;
-    switch (controlType) {
-      case POSITION:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kPosition);
-        break;
-      case VELOCITY:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kVelocity);
-        break;
-      case CURRENT:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kCurrent);
-        break;
-      case DUTYCYCLE:
-        pid.setReference(setpoint, com.revrobotics.CANSparkBase.ControlType.kDutyCycle);
-        break;
-    }
+    this.setpoint.set(setpoint);
+    var sparkControlType = switch (controlType) {
+      case POSITION -> com.revrobotics.CANSparkBase.ControlType.kPosition;
+      case VELOCITY -> com.revrobotics.CANSparkBase.ControlType.kVelocity;
+      case CURRENT -> com.revrobotics.CANSparkBase.ControlType.kCurrent;
+      case DUTYCYCLE -> com.revrobotics.CANSparkBase.ControlType.kDutyCycle;
+    };
+    pid.setReference(setpoint, sparkControlType);
   }
 
   @Override
   public double getSetpoint() {
-    return setpoint;
+    return setpoint.get();
   }
 
   @Override
