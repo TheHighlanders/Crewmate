@@ -1,6 +1,5 @@
 package crewmate.lib.motor;
 
-import java.util.Optional;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
@@ -34,7 +33,9 @@ public class CrewmateTalonFX implements CrewmateMotor {
     config.currentLimit.ifPresent(this::setCurrentLimit);
     setBrakeMode(config.brakeMode.orElse(false));
 
-    setPID(config.p, config.i, config.d);
+    config.p.ifPresent(this::setP);
+    config.i.ifPresent(this::setI);
+    config.d.ifPresent(this::setD);
   }
 
   private void configureController() {
@@ -51,13 +52,6 @@ public class CrewmateTalonFX implements CrewmateMotor {
     this.config.Slot0.kP = p;
     this.config.Slot0.kI = i;
     this.config.Slot0.kD = d;
-    controller.getConfigurator().apply(this.config);
-  }
-
-  public void setPID(Optional<Double> p, Optional<Double> i, Optional<Double> d) {
-    this.config.Slot0.kP = p.orElse(this.config.Slot0.kP);
-    this.config.Slot0.kI = i.orElse(this.config.Slot0.kI);
-    this.config.Slot0.kD = d.orElse(this.config.Slot0.kD);
     controller.getConfigurator().apply(this.config);
   }
 
