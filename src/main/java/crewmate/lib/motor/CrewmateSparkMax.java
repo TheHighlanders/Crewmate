@@ -36,7 +36,8 @@ public class CrewmateSparkMax implements CrewmateMotor {
     configureController();
     applyOptimizedSettings();
   }
-  //TODO: why not make motorType a bool to prevent unnnecessary imports
+
+  // TODO: why not make motorType a bool to prevent unnnecessary imports
   public CrewmateSparkMax(int canID, MotorType motorType) {
     this(
         MotorConfig.motorBasic(
@@ -48,9 +49,7 @@ public class CrewmateSparkMax implements CrewmateMotor {
 
   private void initializeController(MotorConfig config) {
     controller.restoreFactoryDefaults();
-    config.p.ifPresent(this::setP);
-    config.i.ifPresent(this::setI);
-    config.d.ifPresent(this::setD);
+    setPID(config.p, config.i, config.d);
     config.currentLimit.ifPresent(this::setCurrentLimit);
     controller.setInverted(config.reversed.orElse(false));
     config.positionConversionFactor.ifPresent(encoder::setPositionConversionFactor);
@@ -77,6 +76,16 @@ public class CrewmateSparkMax implements CrewmateMotor {
     pid.setP(p);
     pid.setI(i);
     pid.setD(d);
+  }
+
+  public void setPID(Optional<Double> p, Optional<Double> i, Optional<Double> d) {
+    double currentP = pid.getP();
+    double currentI = pid.getI();
+    double currentD = pid.getD();
+
+    pid.setP(p.orElse(currentP));
+    pid.setI(i.orElse(currentI));
+    pid.setD(d.orElse(currentD));
   }
 
   @Override
