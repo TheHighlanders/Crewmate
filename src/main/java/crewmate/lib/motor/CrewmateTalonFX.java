@@ -124,12 +124,13 @@ public class CrewmateTalonFX implements CrewmateMotor {
   public void setSetpoint(double setpoint, ControlType controlType) {
     this.setpoint.set(setpoint);
 
-    var request = switch (controlType) {
-      case POSITION -> new com.ctre.phoenix6.controls.PositionDutyCycle(setpoint);
-      case VELOCITY -> new com.ctre.phoenix6.controls.VelocityDutyCycle(setpoint);
-      case CURRENT -> new com.ctre.phoenix6.controls.TorqueCurrentFOC(setpoint);
-      case DUTYCYCLE -> new com.ctre.phoenix6.controls.DutyCycleOut(setpoint);
-    };
+    var request =
+        switch (controlType) {
+          case POSITION -> new com.ctre.phoenix6.controls.PositionDutyCycle(setpoint);
+          case VELOCITY -> new com.ctre.phoenix6.controls.VelocityDutyCycle(setpoint);
+          case CURRENT -> new com.ctre.phoenix6.controls.TorqueCurrentFOC(setpoint);
+          case DUTYCYCLE -> new com.ctre.phoenix6.controls.DutyCycleOut(setpoint);
+        };
 
     controller.setControl(request);
   }

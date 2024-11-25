@@ -24,9 +24,12 @@ public class CrewmateSparkMax implements CrewmateMotor {
   private static final int DEFAULT_ENCODER_AVERAGE_DEPTH = 2;
 
   public CrewmateSparkMax(MotorConfig config) {
-    controller = new CANSparkMax(
-        config.canID,
-        config.motorType == MotorConfig.Type.BRUSHLESS ? MotorType.kBrushless : MotorType.kBrushed);
+    controller =
+        new CANSparkMax(
+            config.canID,
+            config.motorType == MotorConfig.Type.BRUSHLESS
+                ? MotorType.kBrushless
+                : MotorType.kBrushed);
 
     encoder = controller.getEncoder();
     pid = controller.getPIDController();
@@ -36,7 +39,8 @@ public class CrewmateSparkMax implements CrewmateMotor {
     configureController();
     applyOptimizedSettings();
   }
-  //TODO: why not make motorType a bool to prevent unnnecessary imports
+
+  // TODO: why not make motorType a bool to prevent unnnecessary imports
   public CrewmateSparkMax(int canID, MotorType motorType) {
     this(
         MotorConfig.motorBasic(
@@ -169,12 +173,13 @@ public class CrewmateSparkMax implements CrewmateMotor {
   @Override
   public void setSetpoint(double setpoint, ControlType controlType) {
     this.setpoint.set(setpoint);
-    var sparkControlType = switch (controlType) {
-      case POSITION -> com.revrobotics.CANSparkBase.ControlType.kPosition;
-      case VELOCITY -> com.revrobotics.CANSparkBase.ControlType.kVelocity;
-      case CURRENT -> com.revrobotics.CANSparkBase.ControlType.kCurrent;
-      case DUTYCYCLE -> com.revrobotics.CANSparkBase.ControlType.kDutyCycle;
-    };
+    var sparkControlType =
+        switch (controlType) {
+          case POSITION -> com.revrobotics.CANSparkBase.ControlType.kPosition;
+          case VELOCITY -> com.revrobotics.CANSparkBase.ControlType.kVelocity;
+          case CURRENT -> com.revrobotics.CANSparkBase.ControlType.kCurrent;
+          case DUTYCYCLE -> com.revrobotics.CANSparkBase.ControlType.kDutyCycle;
+        };
     pid.setReference(setpoint, sparkControlType);
   }
 
