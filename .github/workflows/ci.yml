@@ -12,26 +12,26 @@ jobs:
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
-        
+
       - name: "Setup Java"
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "17"
-          
+
       - name: "Build all"
         run: ./gradlew build
 
       - name: Spotless Check
         id: spotless
         run: |
-          ./gradlew spotlessApply
-        
+          ./gradlew spotlessCheck
+
       - name: "Release: Get version number"
         id: get_version
         if: github.event_name == 'release'
         uses: battila7/get-version-action@v2
-        
+
       - name: "Release: Get release info"
         id: get_release_info
         if: github.event_name == 'release'
@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.get_version.outputs.version-without-v }}
-          
+
       - name: "Release: Upload vendordep"
         if: github.event_name == 'release'
         uses: actions/upload-release-asset@v1
@@ -57,3 +57,15 @@ jobs:
           asset_path: Crewmate.json
           asset_name: Crewmate.json
           asset_content_type: application/json
+
+      - name: Upload Maven Files
+        if: github.event_name == 'release'
+        run: |
+          cd build\repos\releases\crewmate\lib\Crewmate-java\${{ steps.get_version.outputs.version-without-v }}
+          for file in *; do
+            curl -X POST \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: $(file -b --mime-type $file)" \
+              --data-binary @"$file" \
+              "${{ steps.get_release_info.outputs.upload_url }}?name=$(basename $file)"
+          done
