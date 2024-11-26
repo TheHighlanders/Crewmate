@@ -59,15 +59,12 @@ jobs:
           asset_name: Crewmate.json
           asset_content_type: application/json
 
-      - name: Upload Maven Files
+      - name: Upload Release Assets
         if: github.event_name == 'release'
         run: |
-          cd build/repos/releases/crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}
-          for file in *; do
-            encoded_name=$(echo "$file" | jq -sRr @uri)
-            curl -X POST \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: $(file -b --mime-type $file)" \
-              --data-binary @"$file" \
-              "${{ steps.get_release_info.outputs.upload_url }}?name=${encoded_name}"
+          for file in build/repos/releases/crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/*; do
+            echo "Uploading $file"
+            gh release upload ${{ github.event.release.tag_name }} "$file"
           done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
