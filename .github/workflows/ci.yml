@@ -54,6 +54,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-          asset_path: build/vendordep/Crewmate.json
+          asset_path: Crewmate.json
           asset_name: Crewmate.json
           asset_content_type: application/json
