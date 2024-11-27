@@ -91,6 +91,12 @@ jobs:
           git commit -m "Deploy build artifacts for version ${{ steps.get_version.outputs.version-without-v }}"
           git push origin pages -f
 
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: maven-artifacts
+          path: crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}//"
+
   pages:
     name: Deploy Pages
     needs: athena
@@ -100,21 +106,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: "Release: Get version number"
-        id: get_version
-        if: github.event_name == 'release'
-        uses: battila7/get-version-action@v2
-
-      - name: "Build all"
-        run: ./gradlew build
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/"
 
       - name: Deploy to GitHub Pages
         id: deployment
