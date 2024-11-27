@@ -91,11 +91,16 @@ jobs:
           git commit -m "Deploy build artifacts for version ${{ steps.get_version.outputs.version-without-v }}"
           git push origin pages -f
 
+      - name: List Specific Directory
+        run: |
+          echo "Listing files:"
+          ls -R crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}
+
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: maven-artifacts
-          path: crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/"
+          path: crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/
 
   pages:
     name: Deploy Pages
