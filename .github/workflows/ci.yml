@@ -92,12 +92,15 @@ jobs:
           git push origin pages -f
 
       - name: Setup Pages
+        if: github.event_name == 'release'
         uses: actions/configure-pages@v4
 
       - name: Upload Pages artifact
+        if: github.event_name == 'release'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/"
 
       - name: Deploy to GitHub Pages
+        if: github.event_name == 'release'
         uses: actions/deploy-pages@v4
