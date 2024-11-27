@@ -19,6 +19,16 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
+      - name: "Release: Get version number"
+        id: get_version
+        if: github.event_name == 'release'
+        uses: battila7/get-version-action@v2
+
+      - name: Update Version Number
+        if: github.event_name == 'release'
+        run: |
+          sed -i "s/def pubVersion = '1.0.0'/def pubVersion = '${{ steps.get_version.outputs.version-without-v }}'/" publish.gradle
+
       - name: "Build all"
         run: ./gradlew build
 
@@ -27,11 +37,6 @@ jobs:
         id: spotless
         run: |
           ./gradlew spotlessCheck
-
-      - name: "Release: Get version number"
-        id: get_version
-        if: github.event_name == 'release'
-        uses: battila7/get-version-action@v2
 
       - name: "Release: Get release info"
         id: get_release_info
