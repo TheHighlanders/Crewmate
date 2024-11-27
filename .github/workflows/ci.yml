@@ -1,0 +1,140 @@
+name: CI
+
+on:
+  push:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  athena:
+    name: Build for Athena
+    runs-on: ubuntu-22.04
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "Setup Java"
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: "Release: Get version number"
+        id: get_version
+        if: github.event_name == 'release'
+        uses: battila7/get-version-action@v2
+
+      - name: Update Version Number
+        if: github.event_name == 'release'
+        run: |
+          sed -i "s/def pubVersion = '1.0.0'/def pubVersion = '${{ steps.get_version.outputs.version-without-v }}'/" publish.gradle
+
+      - name: "Build all"
+        run: ./gradlew build
+
+      - name: Spotless Check
+        if: github.event_name != 'release'
+        id: spotless
+        run: |
+          ./gradlew spotlessCheck
+
+      - name: "Release: Get release info"
+        id: get_release_info
+        if: github.event_name == 'release'
+        uses: bruceadams/get-release@v1.2.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      # Add Maven Publishing
+      - name: Publish to GitHub Packages
+        if: github.event_name == 'release'
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.get_version.outputs.version-without-v }}
+
+      - name: "Release: Upload vendordep"
+        if: github.event_name == 'release'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
+          asset_path: Crewmate.json
+          asset_name: Crewmate.json
+          asset_content_type: application/json
+
+      - name: Upload Release Assets
+        if: github.event_name == 'release'
+        run: |
+          for file in build/repos/releases/crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/*; do
+            echo "Uploading $file"
+            gh release upload ${{ github.event.release.tag_name }} "$file"
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy Build Artifacts
+        if: github.event_name == 'release'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/
+          cp -r build/repos/releases/crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/* crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/
+          git checkout --orphan pages
+          git add .
+          git commit -m "Deploy build artifacts for version ${{ steps.get_version.outputs.version-without-v }}"
+          git push origin pages -f
+
+      - name: List Specific Directory
+        run: |
+          echo "Listing files:"
+          ls -R crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/
+
+  pages:
+    name: Deploy Pages
+    needs: athena
+    if: github.event_name == 'release'
+    runs-on: ubuntu-22.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Check Pages Deployment Status
+        run: |
+          echo "Checking GitHub Pages deployment status..."
+          for i in {1..5}; do
+            STATUS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                     "https://api.github.com/repos/${{ github.repository }}/pages/builds/latest" \
+                     | jq -r '.status')
+            
+            echo "Deployment Status: $STATUS"
+            
+            if [ "$STATUS" = "built" ]; then
+              echo "✅ Pages successfully deployed!"
+              exit 0
+            fi
+            
+            echo "Waiting 30 seconds before next check..."
+            sleep 30
+          done
+
+          echo "❌ Pages deployment status check timed out"
+          exit 1
