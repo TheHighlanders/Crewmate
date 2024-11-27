@@ -79,11 +79,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Build Artifacts
+      - name: Upload Pages Artifacts
         if: github.event_name == 'release'
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/repos/releases/crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/
+          path: build/repos/releases/
 
   pages:
     name: Deploy Pages
