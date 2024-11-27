@@ -97,9 +97,8 @@ jobs:
           ls -R crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages
           path: crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/
 
   pages:
