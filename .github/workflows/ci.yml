@@ -14,9 +14,6 @@ jobs:
   athena:
     name: Build for Athena
     runs-on: ubuntu-22.04
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: "Checkout repository"
         uses: actions/checkout@v4
@@ -94,28 +91,36 @@ jobs:
           git commit -m "Deploy build artifacts for version ${{ steps.get_version.outputs.version-without-v }}"
           git push origin pages -f
 
-          - name: "Release: Get version number"
-          id: get_version
-          if: github.event_name == 'release'
-          uses: battila7/get-version-action@v2
+  pages:
+    name: Deploy Pages
+    needs: athena
+    if: github.event_name == 'release'
+    runs-on: ubuntu-22.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: "Release: Get version number"
+        id: get_version
+        if: github.event_name == 'release'
+        uses: battila7/get-version-action@v2
+
+      - name: "Build all"
+        run: ./gradlew build
 
       - name: Setup Pages
-        if: github.event_name == 'release'
         uses: actions/configure-pages@v4
 
       - name: Upload Pages artifact
-        if: github.event_name == 'release'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/"
 
       - name: Deploy to GitHub Pages
-        if: github.event_name == 'release'
         id: deployment
         uses: actions/deploy-pages@v4
 
       - name: Check Pages Deployment Status
-        if: github.event_name == 'release'
         run: |
           echo "Checking GitHub Pages deployment status..."
           for i in {1..5}; do
