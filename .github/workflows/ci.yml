@@ -68,3 +68,17 @@ jobs:
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy Build Artifacts
+        if: github.event_name == 'release'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p crewmate/lib/Crewmate-java/0.0.1/
+          cp -r build/repos/releases/crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/* crewmate/lib/Crewmate-java/0.0.1/
+          git checkout --orphan pages
+          git rm -rf .
+          cp -r crewmate/lib/Crewmate-java/0.0.1/* .
+          git add .
+          git commit -m "Deploy build artifacts for version ${{ steps.get_version.outputs.version-without-v }}"
+          git push origin pages -f
