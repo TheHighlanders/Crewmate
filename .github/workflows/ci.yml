@@ -85,3 +85,9 @@ jobs:
           git add .
           git commit -m "Deploy build artifacts for version ${{ steps.get_version.outputs.version-without-v }}"
           git push origin pages -f
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'release'
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
