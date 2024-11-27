@@ -92,6 +92,7 @@ jobs:
           git push origin pages -f
 
       - name: Upload Build Artifacts
+        if: github.event_name == 'release'
         uses: actions/upload-pages-artifact@v3
         with:
           path: crewmate/lib/Crewmate-java/${{ steps.get_version.outputs.version-without-v }}/
