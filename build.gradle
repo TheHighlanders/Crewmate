@@ -53,7 +53,7 @@ dependencies {
     implementation "org.ejml:ejml-simple:0.43.1"
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.18.1"
     implementation "com.fasterxml.jackson.core:jackson-core:2.18.1"
-    implementation "com.fasterxml.jackson.core:jackson-databind:2.17.1"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.18.2"
     implementation 'edu.wpi.first.thirdparty.frc2024.opencv:opencv-java:4.8.0-4'
 
     implementation 'gov.nist.math:jama:1.0.3'
